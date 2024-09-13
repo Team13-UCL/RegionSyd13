@@ -13,6 +13,6 @@ namespace RegionSyd13._3.ViewModel
         public string Region { get; set; }
         public string TaskType { get; set; }
         public Patient Patient { get; set; }
-        public Ambulance Ambulance { get; set; }
+        //public Ambulance Ambulance { get; set; }
     }
 }

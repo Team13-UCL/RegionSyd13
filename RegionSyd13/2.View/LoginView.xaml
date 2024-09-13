@@ -45,7 +45,7 @@
                     Height="30"
                     Background="Gray"
                     Foreground="White"
-                    Click="LoginButton_Click" />
+                    />
         </StackPanel>
     </Grid>
 </Window>
