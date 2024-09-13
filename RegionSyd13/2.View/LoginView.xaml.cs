@@ -15,16 +15,13 @@ using System.Windows.Shapes;
 namespace RegionSyd13._2.View
 {
     /// <summary>
-    /// Interaction logic for TaskBankView.xaml
+    /// Interaction logic for LoginView.xaml
     /// </summary>
-    public partial class TaskBankView : Window
+    public partial class LoginView : Window
     {
-        public TaskBankView()
+        public LoginView()
         {
             InitializeComponent();
-        }
-        public void Show()
-        {
         }
     }
 }

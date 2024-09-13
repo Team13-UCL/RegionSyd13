@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace RegionSyd13._1.Model
 {
-    internal class Region
+    public class Region
     {
+        public string RegionID { get; set; }
+        public string RegionName { get; set; }
     }
 }

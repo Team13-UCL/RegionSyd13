@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace RegionSyd13._1.Model
 {
-    internal class ConditionCode
+    public enum ConditionCode
     {
+        A,
+        B,
+        C,
+        D,
+        E
     }
 }

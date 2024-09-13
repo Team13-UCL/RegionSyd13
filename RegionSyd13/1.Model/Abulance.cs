@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace RegionSyd13._1.Model
 {
-    internal class Abulance
+    public class Abulance
     {
+        public string RegNr { get; set; }
+        public string Type { get; set; }
+        public string PhoneNumber { get; set; }
     }
 }

@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace RegionSyd13._1.Model
 {
-    internal class Patient
+    public class Patient
     {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public int HandlingTime { get; set; }
+        public ConditionCode ConditionCode { get; set; }
     }
 }

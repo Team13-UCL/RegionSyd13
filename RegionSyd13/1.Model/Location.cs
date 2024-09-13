@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace RegionSyd13._1.Model
 {
-    internal class Location
+    public class Location
     {
+        public string City { get; set; }
+        public string StreetName { get; set; }
+        public string HouseNumber { get; set; }
+        public bool TimeIsCritical { get; set; }
     }
 }
