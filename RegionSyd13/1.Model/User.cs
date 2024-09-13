@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RegionSyd13._2.View
+namespace RegionSyd13._1.Model
 {
-    internal class ViewFileSomKanSlettes
+    internal class User
     {
     }
 }

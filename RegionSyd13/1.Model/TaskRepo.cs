@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RegionSyd13._1.Model
 {
-    internal class ModelFileSomKanSlettes
+    internal class TaskRepo
     {
     }
 }
