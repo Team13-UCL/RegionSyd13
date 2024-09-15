@@ -23,8 +23,36 @@ namespace RegionSyd13._2.View
         {
             InitializeComponent();
         }
-        public void Show()
+        //public void Show()
+        //{
+        //}
+
+        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
         {
+            TextBox textBox = sender as TextBox;
+            if (textBox.Text == textBox.Tag.ToString())
+            {
+                textBox.Text = "";
+                textBox.Foreground = Brushes.Black;
+            }
+        }
+
+        // Event handler for when the TextBox loses focus
+        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            if (string.IsNullOrWhiteSpace(textBox.Text))
+            {
+                textBox.Text = textBox.Tag.ToString();
+                textBox.Foreground = Brushes.Gray;
+            }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            TaskListView taskListView = new TaskListView();
+            taskListView.Show();
+            this.Close();
         }
     }
 }

@@ -23,5 +23,13 @@ namespace RegionSyd13._2.View
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            TaskBankView taskBankView = new TaskBankView();
+            taskBankView.Show();
+            this.Close();
+
+        }
     }
 }

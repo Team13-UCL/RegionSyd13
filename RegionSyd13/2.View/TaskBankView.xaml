@@ -5,8 +5,66 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RegionSyd13._2.View"
         mc:Ignorable="d"
-        Title="TaskBankView" Height="450" Width="800">
-    <Grid>
+        Title="TaskBankView" Height="400" Width="300">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- For Logo -->
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <!-- For Button -->
+        </Grid.RowDefinitions>
+
         
+        <Image Source="/ambulancesyd.png" Width="125" Height="75" 
+               HorizontalAlignment="Left" VerticalAlignment="Top" />
+
+        <!-- Region ID input -->
+        <TextBox Grid.Row="1" Margin="0,5" Text="Region ID" Foreground="Gray"
+                 GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus"/>
+
+        <!-- Opgavetype input -->
+        <TextBox Grid.Row="2" Margin="0,5" Text="Opgavetype" Foreground="Gray"
+                 GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus"/>
+
+        <!-- Opgavebeskrivelse input -->
+        <TextBox Grid.Row="3" Margin="0,5" Text="Opgavebeskrivelse" Foreground="Gray"
+                 GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus"/>
+
+        <!-- Patient noter/håndtering input -->
+        <TextBox Grid.Row="4" Margin="0,5" Text="Patient noter/håndtering" Foreground="Gray"
+                 GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus"/>
+
+        <!-- Dato og tid for afhentning input -->
+        <TextBox Grid.Row="5" Margin="0,5" Text="Dato og tid for afhentning" Foreground="Gray"
+                 GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus"/>
+
+        <!-- Dato og tid for afsætning input -->
+        <TextBox Grid.Row="6" Margin="0,5" Text="Dato og tid for afsætning" Foreground="Gray"
+                 GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus"/>
+
+        <!-- Servicemål input -->
+        <TextBox Grid.Row="7" Margin="0,5" Text="Servicemål" Foreground="Gray"
+                 GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus"/>
+
+        <!-- Fra adresse input -->
+        <TextBox Grid.Row="8" Margin="0,5" Text="Fra adresse" Foreground="Gray"
+                 GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus"/>
+
+        <!-- Til adresse input -->
+        <TextBox Grid.Row="9" Margin="0,5" Text="Til adresse" Foreground="Gray"
+                 GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus"/>
+
+        <!-- Opret opgave button -->
+        <Button Grid.Row="10" Content="Opret opgave" Width="120" Height="30" Background="LightGreen" 
+                HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10" Click="Button_Click"/>
     </Grid>
 </Window>

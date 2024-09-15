@@ -31,5 +31,14 @@ namespace RegionSyd13._2.View
             Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri) { UseShellExecute = true });
             e.Handled = true;
         }
+
+        private void LoginButton_Click(object sender, RoutedEventArgs e)
+        {
+            
+            TaskListView taskListView = new TaskListView();
+            taskListView.Show();
+            this.Close();
+
+        }
     }
 }
