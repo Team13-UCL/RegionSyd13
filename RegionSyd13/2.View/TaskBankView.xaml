@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RegionSyd13._2.View"
         mc:Ignorable="d"
-        Title="TaskBankView" Height="400" Width="300">
+        Title="TaskBankView" Height="435" Width="300"
+        WindowStartupLocation="CenterScreen">
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
