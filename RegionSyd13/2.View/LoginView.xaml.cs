@@ -13,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using RegionSyd13._1.Model;
+using RegionSyd13._3.ViewModel;
 
 namespace RegionSyd13._2.View
 {
@@ -21,9 +23,12 @@ namespace RegionSyd13._2.View
     /// </summary>
     public partial class LoginView : Window
     {
+        private TaskBankViewModel taskBankViewModel;
+
         public LoginView()
         {
             InitializeComponent();
+            taskBankViewModel = new TaskBankViewModel(new TaskRepo());
         }
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
@@ -34,11 +39,9 @@ namespace RegionSyd13._2.View
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            
-            TaskListView taskListView = new TaskListView();
+            TaskListView taskListView = new TaskListView(taskBankViewModel);
             taskListView.Show();
             this.Close();
-
         }
     }
 }

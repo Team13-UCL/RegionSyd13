@@ -11,6 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using RegionSyd13._3.ViewModel;
+using RegionSyd13._1.Model;
+using System.Diagnostics;
 
 namespace RegionSyd13._2.View
 {
@@ -19,40 +22,36 @@ namespace RegionSyd13._2.View
     /// </summary>
     public partial class TaskBankView : Window
     {
+        private TaskBankViewModel taskBankViewModel;
         public TaskBankView()
         {
             InitializeComponent();
+            taskBankViewModel = new TaskBankViewModel(new TaskRepo());
+            DataContext = taskBankViewModel;
+
+
+
         }
+
         //public void Show()
         //{
         //}
 
-        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
-        {
-            TextBox textBox = sender as TextBox;
-            if (textBox.Text == textBox.Tag.ToString())
-            {
-                textBox.Text = "";
-                textBox.Foreground = Brushes.Black;
-            }
-        }
-
-        // Event handler for when the TextBox loses focus
-        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
-        {
-            TextBox textBox = sender as TextBox;
-            if (string.IsNullOrWhiteSpace(textBox.Text))
-            {
-                textBox.Text = textBox.Tag.ToString();
-                textBox.Foreground = Brushes.Gray;
-            }
-        }
+       
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            TaskListView taskListView = new TaskListView();
+            TaskListView taskListView = new TaskListView(taskBankViewModel);
             taskListView.Show();
+
+
+
             this.Close();
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 }

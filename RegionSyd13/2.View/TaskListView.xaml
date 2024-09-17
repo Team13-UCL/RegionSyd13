@@ -4,16 +4,19 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RegionSyd13._2.View"
+        xmlns:ViewModel="clr-namespace:RegionSyd13._3.ViewModel" 
         mc:Ignorable="d"
         Title="TaskListView"
         Height="450"
-        Width="800"
+        Width="900"
         WindowStartupLocation="CenterScreen">
+
+   
     <Grid>
         <!-- Define columns and rows -->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
-            <!-- ListView Column -->
+            <!-- DataGrid Column -->
             <ColumnDefinition Width="100" />
             <!-- Filter Buttons Column -->
         </Grid.ColumnDefinitions>
@@ -21,10 +24,12 @@
             <RowDefinition Height="Auto" />
             <!-- For the ComboBox at the top -->
             <RowDefinition Height="*" />
-            <!-- For ListView and Filter Buttons -->
+            <!-- For DataGrid and Filter Buttons -->
             <RowDefinition Height="Auto" />
             <!-- For the bottom buttons -->
         </Grid.RowDefinitions>
+        
+        
 
         <!-- ComboBox in top right corner -->
         <ComboBox Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" Width="90" 
@@ -33,14 +38,20 @@
         <Image Source="/ambulancesyd.png" Width="100" Height="50" 
        HorizontalAlignment="Left" VerticalAlignment="Top" />
 
-
-        <ListView Grid.Column="0" Grid.Row="1" Margin="10,10,5,0">
-            <!-- Sample data template for the ListView -->
-            <ListViewItem>Rute 1 - info - info - info</ListViewItem>
-            <ListViewItem>Rute 2 - info - info - info</ListViewItem>
-            <ListViewItem>Rute 3 - info - info - info</ListViewItem>
-            <ListViewItem>Rute 4 - info - info - info</ListViewItem>
-        </ListView>
+        <!-- DataGrid replacing ListView -->
+        <DataGrid Grid.Column="0" Grid.Row="1" Margin="10,10,5,0" CanUserAddRows="False" CanUserDeleteRows="False" AutoGenerateColumns="False" ItemsSource="{Binding Tasks, Mode=OneWay}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Region ID" Binding="{Binding RegionalTaskID}" Width="4*" />
+                <DataGridTextColumn Header="Opgavetype" Binding="{Binding TaskType}" />
+                <DataGridTextColumn Header="Opgavebeskrivelse" Binding="{Binding TaskDescription}" />
+                <DataGridTextColumn Header="Patient noter/håndtering" Binding="{Binding PatientNotes}" />
+                <DataGridTextColumn Header="afhentning" Binding="{Binding DateAndTimeForPickup}" />
+                <DataGridTextColumn Header="afsætning" Binding="{Binding DateAndTimeForDestination}" />
+                <DataGridTextColumn Header="Servicemål" Binding="{Binding ServiceTarget}" />
+                <DataGridTextColumn Header="Fra adresse" Binding="{Binding StartLocation}" />
+                <DataGridTextColumn Header="Til adresse" Binding="{Binding Destination}" />
+            </DataGrid.Columns>
+        </DataGrid>
 
         <!-- Filter Buttons on the right side -->
         <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" Margin="5">
