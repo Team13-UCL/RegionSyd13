@@ -17,7 +17,7 @@ using Task = RegionSyd13._1.Model.Task;
 namespace RegionSyd13._3.ViewModel
 {
     
-    public class TaskBankViewModel : INotifyPropertyChanged
+    public class TaskBankViewModel : ViewModelBase
     {
 
         private string regionalTaskID;
@@ -205,15 +205,6 @@ namespace RegionSyd13._3.ViewModel
                 serviceTarget = value;
                 OnPropertyChanged();
             }
-        }
-
-
-
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
 
