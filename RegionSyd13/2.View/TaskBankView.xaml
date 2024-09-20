@@ -33,7 +33,7 @@
         <!--alle textboxe har en textblock koblet på, så den viser en text indtil der bliver skrevet i den, nemmeste måde jeg lige ku se, der er nok en nemmere måde, men det her virker-->
         <!-- Region ID input -->
         <TextBox x:Name="tbRegionalTaskID" Grid.Row="1" Margin="0,5" Text="{Binding RegionalTaskID, UpdateSourceTrigger=PropertyChanged}" Foreground="Gray"
-                  TextChanged="TextBox_TextChanged"/>
+                  />
         <TextBlock IsHitTestVisible="False" Text="Region ID" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="6,0,0,0" Foreground="DarkGray" Grid.Row="1">
             <TextBlock.Style>
                 <Style TargetType="{x:Type TextBlock}">

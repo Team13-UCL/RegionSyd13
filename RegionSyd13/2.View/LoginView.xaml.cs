@@ -27,6 +27,7 @@ namespace RegionSyd13._2.View
     {
         private TaskBankViewModel taskBankViewModel;
 
+
         public LoginView()
         {
             InitializeComponent();
@@ -63,7 +64,9 @@ namespace RegionSyd13._2.View
                     {
                         MessageBox.Show("Login Success");
                         // Proceed to the next view, for example:
-                        TaskListView taskListView = new TaskListView(taskBankViewModel);
+                        var taskRepo = new TaskRepo();
+                        var taskListViewModel = new TaskListViewModel(taskRepo);
+                        TaskListView taskListView = new TaskListView(taskListViewModel);
                         taskListView.Show();
                         this.Close();
                     }
@@ -73,6 +76,13 @@ namespace RegionSyd13._2.View
                     }
                 }
             }
+
+
+
+
+
+
+
 
         }
     }

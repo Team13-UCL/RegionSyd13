@@ -82,6 +82,16 @@ namespace RegionSyd13._3.ViewModel
             taskRepo.AddTask(newTask); // Ensure the task is added to the repository first
             Tasks.Add(newTask); // Then add it to the observable collection
 
+            if (taskRepo.GetTaskByID(RegionalTaskID) != null)
+            {
+                // Update existing task
+                taskRepo.EditTask(newTask);
+            }
+            else
+            {
+                // Add new task
+                taskRepo.AddTask(newTask);
+            }
         }
 
 

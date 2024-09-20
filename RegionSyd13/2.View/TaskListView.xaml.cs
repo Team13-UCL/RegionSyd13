@@ -23,13 +23,14 @@ namespace RegionSyd13._2.View
     {
         public TaskListView()
         {
+            InitializeComponent();
+            DataContext = new TaskListViewModel(new TaskRepo());
         }
 
-        public TaskListView(TaskBankViewModel viewModel)
+        public TaskListView(TaskListViewModel viewModel)
         {
             InitializeComponent();
             DataContext = viewModel;
-
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -38,6 +39,22 @@ namespace RegionSyd13._2.View
             taskBankView.Show();
             this.Close();
 
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is TaskListViewModel taskListViewModel)
+            {
+                if (taskListViewModel.SelectedTask != null)
+                {
+                    taskListViewModel.EditTask(taskListViewModel.SelectedTask);
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Ingen opgave valgt!");
+                }
+            }
         }
     }
 }
