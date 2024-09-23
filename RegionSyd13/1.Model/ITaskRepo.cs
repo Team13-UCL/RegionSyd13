@@ -10,10 +10,10 @@ namespace RegionSyd13._1.Model
     public interface ITaskRepo
     {
         List<Task> GetAllTasks();
-        Task GetTaskByID(string taskID);
+        Task GetTaskByID(int taskID);
         void AddTask(Task newTask);
         void EditTask(Task updatedTask);
-        void DeleteTask(string taskID);
+        void DeleteTask(int taskID);
 
         
     }

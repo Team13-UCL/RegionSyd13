@@ -11,6 +11,7 @@ using System.Windows;
 using System.Windows.Input;
 using Microsoft.VisualBasic;
 using RegionSyd13._1.Model;
+using RegionSyd13._2.View;
 using RegionSyd13.MVVM;
 using Task = RegionSyd13._1.Model.Task;
 
@@ -31,70 +32,113 @@ namespace RegionSyd13._3.ViewModel
         private string dateAndTimeForPickup;
         private string dateAndTimeForDestination;
         private string serviceTarget;
+        public ICommand AddTaskCommand { get; private set; }
+        public ICommand EditTaskCommand { get; private set; }
+        public ICommand DeleteTaskCommand { get; private set; }
+        public ObservableCollection<Task> Tasks { get; set; }
 
-                
-        private ObservableCollection<Task> tasks;
-        public ObservableCollection<Task> Tasks
+
+
+
+
+        private Task selectedTask;
+        public Task SelectedTask
         {
-            get => tasks;
+            get => selectedTask;
             set
             {
-                tasks = value;
-                OnPropertyChanged();
+                if (selectedTask != value)
+                {
+                    selectedTask = value;
+                    OnPropertyChanged();
+                    Debug.WriteLine($"SelectedTask set to: {selectedTask}");
+                }
             }
         }
 
-        
-
-
-        private  ITaskRepo taskRepo;
-
-        public ICommand AddTaskCommand { get; private set; }
+        private ITaskRepo taskRepo;
 
 
 
-       
+
 
         public TaskBankViewModel(ITaskRepo taskRepo)
         {
             this.taskRepo = taskRepo;
-            Tasks = new ObservableCollection<Task>(taskRepo.GetAllTasks());
+
             AddTaskCommand = new RelayCommand(AddTask);
+            EditTaskCommand = new RelayCommand(EditTask);
+            DeleteTaskCommand = new RelayCommand(DeleteTask);
+            Tasks = new ObservableCollection<Task>(taskRepo.GetAllTasks());
         }
 
-        
-      
+
+
+
+
+
         public void AddTask(object obj)
         {
-            var newTask = new Task
+            if (SelectedTask == null)
             {
-                RegionalTaskID = RegionalTaskID,
-                TaskType = TaskType,
-                TaskDescription = TaskDescription,
-                PatientNotes = PatientNotes,
-                StartLocation = StartLocation,
-                Destination = Destination,
-                DateAndTimeForPickup = DateAndTimeForPickup,
-                DateAndTimeForDestination = DateAndTimeForDestination,
-                ServiceTarget = ServiceTarget,
-            };
 
-            taskRepo.AddTask(newTask); // Ensure the task is added to the repository first
-            Tasks.Add(newTask); // Then add it to the observable collection
+                int newTaskID = Tasks.Count + 1; 
 
-            if (taskRepo.GetTaskByID(RegionalTaskID) != null)
-            {
-                // Update existing task
-                taskRepo.EditTask(newTask);
-            }
-            else
-            {
-                // Add new task
-                taskRepo.AddTask(newTask);
+                var newTask = new Task
+                {
+                    TaskID = newTaskID, 
+                    RegionalTaskID = RegionalTaskID, 
+                    TaskType = TaskType,
+                    TaskDescription = TaskDescription,
+                    PatientNotes = PatientNotes,
+                    StartLocation = StartLocation,
+                    Destination = Destination,
+                    DateAndTimeForPickup = DateAndTimeForPickup,
+                    DateAndTimeForDestination = DateAndTimeForDestination,
+                    ServiceTarget = ServiceTarget,
+                };
+
+                if (!Tasks.Any(t => t.TaskID == newTask.TaskID)) 
+                {
+                    Tasks.Add(newTask);
+                    taskRepo.AddTask(newTask); 
+                }
+
             }
         }
 
 
+
+
+
+        public void EditTask(object obj)
+        {
+            if (SelectedTask == null)
+            {
+                MessageBox.Show("Please select a task to edit.");
+                return;
+            }
+            if (SelectedTask != null)
+            {
+                taskRepo.EditTask(SelectedTask);
+                
+                OnPropertyChanged(nameof(Tasks));
+            }
+            
+            
+        }
+
+
+
+        public void DeleteTask(object obj)
+        {
+            if (obj is Task taskToDelete)
+            {
+                taskRepo.DeleteTask(taskToDelete.TaskID);
+                Tasks.Remove(taskToDelete);
+            }
+        }
+        
 
         public void Login()
         {

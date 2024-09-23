@@ -39,17 +39,17 @@
        HorizontalAlignment="Left" VerticalAlignment="Top" />
 
         <!-- DataGrid replacing ListView -->
-        <DataGrid Grid.Column="0" Grid.Row="1" Margin="10,10,5,0" CanUserAddRows="False" CanUserDeleteRows="False" AutoGenerateColumns="False" ItemsSource="{Binding Tasks}"  SelectedItem="{Binding SelectedTask}">
+        <DataGrid Grid.Column="0" Grid.Row="1" Margin="10,10,5,0" CanUserAddRows="False" CanUserDeleteRows="False" AutoGenerateColumns="False" ItemsSource="{Binding Tasks}" SelectedItem="{Binding SelectedTask, Mode=TwoWay}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Region ID" Binding="{Binding RegionalTaskID}" Width="4*" />
-                <DataGridTextColumn Header="Opgavetype" Binding="{Binding TaskType}" />
-                <DataGridTextColumn Header="Opgavebeskrivelse" Binding="{Binding TaskDescription}" />
-                <DataGridTextColumn Header="Patient noter/håndtering" Binding="{Binding PatientNotes}" />
-                <DataGridTextColumn Header="afhentning" Binding="{Binding DateAndTimeForPickup}" />
-                <DataGridTextColumn Header="afsætning" Binding="{Binding DateAndTimeForDestination}" />
-                <DataGridTextColumn Header="Servicemål" Binding="{Binding ServiceTarget}" />
-                <DataGridTextColumn Header="Fra adresse" Binding="{Binding StartLocation}" />
-                <DataGridTextColumn Header="Til adresse" Binding="{Binding Destination}" />
+                <DataGridTextColumn Header="Region ID" Binding="{Binding RegionalTaskID, UpdateSourceTrigger=PropertyChanged}" Width="4*" />
+                <DataGridTextColumn Header="Opgavetype" Binding="{Binding TaskType, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Header="Opgavebeskrivelse" Binding="{Binding TaskDescription, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Header="Patient noter/håndtering" Binding="{Binding PatientNotes, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Header="afhentning" Binding="{Binding DateAndTimeForPickup, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Header="afsætning" Binding="{Binding DateAndTimeForDestination, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Header="Servicemål" Binding="{Binding ServiceTarget, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Header="Fra adresse" Binding="{Binding StartLocation, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Header="Til adresse" Binding="{Binding Destination, UpdateSourceTrigger=PropertyChanged}" />
             </DataGrid.Columns>
         </DataGrid>
 

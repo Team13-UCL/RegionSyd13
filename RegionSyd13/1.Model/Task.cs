@@ -10,6 +10,8 @@ namespace RegionSyd13._1.Model
 {
      public class Task
     {
+
+        public int TaskID { get; set; }
         public string RegionalTaskID { get; set; }
         public string TaskType { get; set; }
 
@@ -24,6 +26,8 @@ namespace RegionSyd13._1.Model
 
         public string DateAndTimeForPickup { get; set; }
         public string DateAndTimeForDestination { get; set; }
+
+        
 
         public void GetTaskDetails() 
         {

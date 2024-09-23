@@ -22,22 +22,31 @@ namespace RegionSyd13._2.View
     /// </summary>
     public partial class TaskBankView : Window
     {
-        private TaskBankViewModel taskBankViewModel;
+        private TaskBankViewModel taskBankViewModel = new TaskBankViewModel(TaskRepo.GetInstance());
 
         public TaskBankView()
         {
             InitializeComponent();
-            taskBankViewModel = new TaskBankViewModel(new TaskRepo());
+            
             DataContext = taskBankViewModel;
+        }
+
+        public TaskBankView(TaskBankViewModel viewModel)
+        {
+            InitializeComponent();
+            DataContext = viewModel;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var taskRepo = new TaskRepo();
-            var taskListViewModel = new TaskListViewModel(taskRepo);
-            TaskListView taskListView = new TaskListView(taskListViewModel);
+            //var taskRepo = new TaskRepo();
+            //var taskListViewModel = new TaskBankViewModel(taskRepo);
+            //TaskListView taskListView = new TaskListView(taskBankViewModel);
+            //taskListView.Show();
+            //this.Close();
+            TaskListView taskListView = new TaskListView(taskBankViewModel);
             taskListView.Show();
             this.Close();
         }
+        }
     }
-}

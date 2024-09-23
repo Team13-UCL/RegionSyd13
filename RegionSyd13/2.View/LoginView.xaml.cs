@@ -25,13 +25,13 @@ namespace RegionSyd13._2.View
     /// </summary>
     public partial class LoginView : Window
     {
+       
         private TaskBankViewModel taskBankViewModel;
-
 
         public LoginView()
         {
             InitializeComponent();
-            taskBankViewModel = new TaskBankViewModel(new TaskRepo());
+            taskBankViewModel = new TaskBankViewModel(TaskRepo.GetInstance());
         }
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
@@ -42,7 +42,7 @@ namespace RegionSyd13._2.View
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            // Database connection
+            //Database connection
             using (SqlConnection con = new SqlConnection(@"Data Source=hedhed.database.windows.net;Initial Catalog=Login_RegionSyd13;User ID=Featherlance;Password=Nisse197512"))
             {
                 con.Open();
@@ -64,9 +64,7 @@ namespace RegionSyd13._2.View
                     {
                         MessageBox.Show("Login Success");
                         // Proceed to the next view, for example:
-                        var taskRepo = new TaskRepo();
-                        var taskListViewModel = new TaskListViewModel(taskRepo);
-                        TaskListView taskListView = new TaskListView(taskListViewModel);
+                        TaskListView taskListView = new TaskListView(taskBankViewModel);
                         taskListView.Show();
                         this.Close();
                     }
@@ -76,14 +74,7 @@ namespace RegionSyd13._2.View
                     }
                 }
             }
-
-
-
-
-
-
-
-
+            
         }
     }
 }

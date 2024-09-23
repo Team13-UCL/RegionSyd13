@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,17 +22,20 @@ namespace RegionSyd13._2.View
     /// </summary>
     public partial class TaskListView : Window
     {
+        private TaskBankViewModel taskBankViewModel = new TaskBankViewModel(TaskRepo.GetInstance());
+
         public TaskListView()
         {
             InitializeComponent();
-            DataContext = new TaskListViewModel(new TaskRepo());
+            DataContext = taskBankViewModel;
         }
 
-        public TaskListView(TaskListViewModel viewModel)
+        public TaskListView(TaskBankViewModel viewModel)
         {
             InitializeComponent();
             DataContext = viewModel;
         }
+        
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -43,18 +47,11 @@ namespace RegionSyd13._2.View
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            if (DataContext is TaskListViewModel taskListViewModel)
-            {
-                if (taskListViewModel.SelectedTask != null)
-                {
-                    taskListViewModel.EditTask(taskListViewModel.SelectedTask);
-                    this.Close();
-                }
-                else
-                {
-                    MessageBox.Show("Ingen opgave valgt!");
-                }
-            }
+            
+            TaskBankView taskBankView = new TaskBankView();
+            taskBankView.Show();
+            this.Close();
         }
+
     }
 }
