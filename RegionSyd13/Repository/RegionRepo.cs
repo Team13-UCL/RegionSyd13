@@ -14,18 +14,18 @@ namespace RegionSyd13.Repository
             private readonly string _connectionString;
             public RegionRepo(string connectionString)
             {
-                _connectionString = connectionString;
+                 _connectionString = Connection.ConnectionString;
             }
             public void Add(Region entity)
             {
-                string query = "INSERT INTO Region (RegID, Name)\n" +
-                    "VALUES (@RegID, @Name)";
+                string query = "INSERT INTO Region (RegID, RegName)\n" +
+                    "VALUES (@RegID, @RegName)";
 
                 using (SqlConnection connection = new SqlConnection(_connectionString))
                 {
                     SqlCommand command = new SqlCommand(query, connection);
                     command.Parameters.AddWithValue("@Firstname", entity.RegID);
-                    command.Parameters.AddWithValue("@LastName", entity.Name);
+                    command.Parameters.AddWithValue("@LastName", entity.RegName);
                     connection.Open();
                     command.ExecuteNonQuery();
                 }
@@ -46,8 +46,8 @@ namespace RegionSyd13.Repository
 
             public IEnumerable<Region> GetAll()
             {
-                var Regions = new List<Region>();
-                string query = "SELECT * FROM CUSTOMER";
+                var regions = new List<Region>();
+                string query = "SELECT * FROM Region";
                 using (SqlConnection connection = new SqlConnection(_connectionString))
                 {
                     SqlCommand command = new SqlCommand(query, connection);
@@ -57,24 +57,24 @@ namespace RegionSyd13.Repository
                     {
                         while (reader.Read())
                         {
-                            Regions.Add(new Region
+                            regions.Add(new Region
                             {
                                 
                                 RegID = (string)reader["FirstName"],
-                                Name = (string)reader["LastName"]
+                                RegName = (string)reader["LastName"]
                                 
                             });
                         }
                     }
                 }
 
-                return Regions;
+                return regions;
             }
 
             public Region GetById(int id)
             {
-                Region customer = null;
-                string query = "SELECT * FROM CUSTOMER WHERE CustomerID = @CustomerID";
+                Region region = null;
+                string query = "SELECT * FROM Region WHERE RegID = @RegID";
 
                 using (SqlConnection connection = new SqlConnection(_connectionString))
                 {
@@ -86,29 +86,29 @@ namespace RegionSyd13.Repository
                     {
                         if (reader.Read())
                         {
-                            customer = new Region
+                            region = new Region
                             {
                                 RegID = (string)reader["FirstName"],
-                                Name = (string)reader["LastName"]
+                                RegName = (string)reader["LastName"]
                             };
                         }
                     }
                 }
 
-                return customer;
+                return region;
             }
 
             public void Update(Region entity)
             {
             string query = "UPDATE Region \n " +
-            "SET Name = @Name, RegID = @RegID\n" +
+            "SET RegName = @RegName, RegID = @RegID\n" +
             "WHERE RegID = @RegID";
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@RegID", entity.RegID);
-                command.Parameters.AddWithValue("@Name", entity.Name);                                
+                command.Parameters.AddWithValue("@RegName", entity.RegName);                                
                 connection.Open();
                 command.ExecuteNonQuery();
             }

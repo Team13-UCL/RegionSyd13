@@ -96,7 +96,7 @@ namespace RegionSyd13._3.ViewModel
                     Destination = Destination,
                     DateAndTimeForPickup = DateAndTimeForPickup,
                     DateAndTimeForDestination = DateAndTimeForDestination,
-                    ServiceTarget = ServiceTarget,
+                    ServiceGoals = ServiceTarget,
                 };
 
                 if (!Tasks.Any(t => t.TaskID == newTask.TaskID)) 

@@ -8,33 +8,19 @@ using Microsoft.VisualBasic;
 
 namespace RegionSyd13._1.Model
 {
-     public class Task
+    public class Task
     {
 
         public int TaskID { get; set; }
-        public string RegionalTaskID { get; set; }
+
+        public string RegTaskID { get; set; }
+
         public string TaskType { get; set; }
 
         public string TaskDescription { get; set; }
-        public string PatientNotes { get; set; }
-        //public string TaskStatus { get; set; }
-        public string StartLocation { get; set; }
+
         public string Destination { get; set; }
-        //public Patient TaskPatient { get; set; }
 
-        public string ServiceTarget { get; set; }
-
-        public string DateAndTimeForPickup { get; set; }
-        public string DateAndTimeForDestination { get; set; }
-
-        
-
-        public void GetTaskDetails() 
-        {
-        }
-
-        public void SetTaskDetails(string details)
-        {
-        }
+        public string ServiceGoals { get; set; }
     }
 }

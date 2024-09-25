@@ -8,9 +8,11 @@ namespace RegionSyd13._1.Model
 {
     public class Patient
     {
+        public int PatientID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public int HandlingTime { get; set; }
-        public ConditionCode ConditionCode { get; set; }
+        public string HandlingNote { get; set; }
+
+        public string Type { get; set; }
     }
 }

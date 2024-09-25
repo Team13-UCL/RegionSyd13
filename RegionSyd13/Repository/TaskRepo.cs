@@ -1,74 +1,136 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.SqlClient;
 using RegionSyd13._1.Model;
+using Task = RegionSyd13._1.Model.Task;
+
 
 namespace RegionSyd13.Repository
 {
-    public class TaskRepo : IRepo //Tager fra ITaskRepo
+    internal class TaskRepo : IRepo<Task>
     {
-        private List<Task> Tasks = new List<Task>();
-        private static TaskRepo _instance;  // Singleton instance
-        public static TaskRepo GetInstance()
+        private readonly string _connectionString;
+
+        public TaskRepo(string connectionString)
         {
-            if (_instance == null)
+            _connectionString = Connection.ConnectionString;
+        }
+
+        // Add a new Task
+        public void Add(Task entity)
+        {
+            string query = "INSERT INTO Task (TaskID, RegTaskID, Type, Description, ServiceGoals, PatientID, LocationID, RegionID) " +
+                           "VALUES (@TaskID, @RegTaskID, @Type, @Description, @ServiceGoals, @PatientID, @LocationID, @RegionID)";
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                _instance = new TaskRepo();
-            }
-            return _instance;
-        }
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@TaskID", entity.TaskID);
+                command.Parameters.AddWithValue("@RegTaskID", entity.RegTaskID);
+                command.Parameters.AddWithValue("@Type", entity.TaskType);
+                command.Parameters.AddWithValue("@Description", entity.TaskDescription);
+                command.Parameters.AddWithValue("@ServiceGoals", entity.ServiceGoals);                
 
-        public TaskRepo()
-        {
-            // Initialize the Tasks list with some default tasks
-            Tasks = new List<Task>
-            {
-                new Task { RegionalTaskID = "1", TaskType = "Type1", TaskDescription = "Description1", PatientNotes = "Notes1", StartLocation = "Location1", Destination = "Destination1", DateAndTimeForPickup = "2023-10-01 10:00", DateAndTimeForDestination = "2023-10-01 12:00", ServiceTarget = "Target1" },
-                new Task { RegionalTaskID = "2", TaskType = "Type2", TaskDescription = "Description2", PatientNotes = "Notes2", StartLocation = "Location2", Destination = "Destination2", DateAndTimeForPickup = "2023-10-02 10:00", DateAndTimeForDestination = "2023-10-02 12:00", ServiceTarget = "Target2" }
-            };
-        }
-
-        public List<Task> GetAllTasks()
-        {
-            return Tasks;
-        }
-
-        public Task GetTaskByID(int taskID)
-        {
-            return Tasks.FirstOrDefault(t => t.TaskID == taskID);
-        }
-
-        public void AddTask(Task newTask) //Adder en task
-        {
-            Tasks.Add(newTask);
-        }
-
-        public void EditTask(Task editedTask)
-        {
-            var task = GetTaskByID(editedTask.TaskID);
-            if (task != null)
-            {
-                task.RegionalTaskID = editedTask.RegionalTaskID;
-                task.TaskType = editedTask.TaskType;
-                task.TaskDescription = editedTask.TaskDescription;
-                task.PatientNotes = editedTask.PatientNotes;
-                task.StartLocation = editedTask.StartLocation;
-                task.Destination = editedTask.Destination;
-                task.DateAndTimeForPickup = editedTask.DateAndTimeForPickup;
-                task.DateAndTimeForDestination = editedTask.DateAndTimeForDestination;
-                task.ServiceTarget = editedTask.ServiceTarget;
+                connection.Open();
+                command.ExecuteNonQuery();
             }
         }
 
-        public void DeleteTask(int taskID) //Deletes tasks :D
+        // Delete Task by ID
+        public void Delete(int id)
         {
-            var task = GetTaskByID(taskID);
-            if (task != null)
+            string query = "DELETE FROM Task WHERE TaskID = @TaskID";
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                Tasks.Remove(task);
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@TaskID", id);
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+        }
+
+        // Get all Tasks
+        public IEnumerable<Task> GetAll()
+        {
+            var tasks = new List<Task>();
+            string query = "SELECT * FROM Task";
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                SqlCommand command = new SqlCommand(query, connection);
+                connection.Open();
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        tasks.Add(new Task
+                        {
+                            TaskID = (int)reader["TaskID"],
+                            RegTaskID = (string)reader["RegTaskID"],
+                            TaskType = (string)reader["Type"],
+                            TaskDescription = (string)reader["Description"],
+                            ServiceGoals = (string)reader["ServiceGoals"],
+                            
+                        });
+                    }
+                }
+            }
+
+            return tasks;
+        }
+
+        // Get Task by ID
+        public Task GetById(int id)
+        {
+            Task task = null;
+            string query = "SELECT * FROM Task WHERE TaskID = @TaskID";
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@TaskID", id);
+                connection.Open();
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        task = new Task
+                        {
+                            TaskID = (int)reader["TaskID"],
+                            RegTaskID = (string)reader["RegTaskID"],
+                            TaskType = (string)reader["Type"],
+                            TaskDescription = (string)reader["Description"],
+                            ServiceGoals = (string)reader["ServiceGoals"],
+                            
+                        };
+                    }
+                }
+            }
+
+            return task;
+        }
+
+        // Update an existing Task
+        public void Update(Task entity)
+        {
+            string query = "UPDATE Task SET RegTaskID = @RegTaskID, Type = @Type, Description = @Description, " +
+                           "ServiceGoals = @ServiceGoals" +
+                           "WHERE TaskID = @TaskID";
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@TaskID", entity.TaskID);
+                command.Parameters.AddWithValue("@RegTaskID", entity.RegTaskID);
+                command.Parameters.AddWithValue("@Type", entity.TaskType);
+                command.Parameters.AddWithValue("@Description", entity.TaskDescription);
+                command.Parameters.AddWithValue("@ServiceGoals", entity.ServiceGoals);               
+
+                connection.Open();
+                command.ExecuteNonQuery();
             }
         }
     }
