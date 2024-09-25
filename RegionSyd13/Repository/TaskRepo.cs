@@ -8,7 +8,7 @@ using RegionSyd13._1.Model;
 
 namespace RegionSyd13.Repository
 {
-    public class TaskRepo : ITaskRepo //Tager fra ITaskRepo
+    public class TaskRepo : IRepo //Tager fra ITaskRepo
     {
         private List<Task> Tasks = new List<Task>();
         private static TaskRepo _instance;  // Singleton instance

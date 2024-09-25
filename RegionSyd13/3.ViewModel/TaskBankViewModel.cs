@@ -57,13 +57,13 @@ namespace RegionSyd13._3.ViewModel
             }
         }
 
-        private ITaskRepo taskRepo;
+        private IRepo taskRepo;
 
 
 
 
 
-        public TaskBankViewModel(ITaskRepo taskRepo)
+        public TaskBankViewModel(IRepo taskRepo)
         {
             this.taskRepo = taskRepo;
 

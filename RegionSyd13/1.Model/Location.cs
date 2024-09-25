@@ -14,6 +14,10 @@ namespace RegionSyd13._1.Model
         public string HouseNumber { get; set; }
         public bool TimeIsCritical { get; set; }
 
-        
+        //public string GetFullAddress()
+        //{
+        //    return $"{StreetName,HouseNumber, City}";
+        //}
+
     }
 }

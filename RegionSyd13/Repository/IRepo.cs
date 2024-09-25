@@ -8,14 +8,12 @@ using RegionSyd13._1.Model;
 
 namespace RegionSyd13.Repository
 {
-    public interface ITaskRepo
+    public interface IRepo<T> where T : class
     {
-        List<Task> GetAllTasks();
-        Task GetTaskByID(int taskID);
-        void AddTask(Task newTask);
-        void EditTask(Task updatedTask);
-        void DeleteTask(int taskID);
-
-
+        IEnumerable<T> GetAll();
+        T GetById(int id);
+        void Add(T entity);
+        void Update(T entity);
+        void Delete(int id);
     }
 }
