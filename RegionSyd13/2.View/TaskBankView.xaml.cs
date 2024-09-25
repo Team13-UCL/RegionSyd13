@@ -12,8 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using RegionSyd13._3.ViewModel;
-using RegionSyd13._1.Model;
 using System.Diagnostics;
+using RegionSyd13.Repository;
 
 namespace RegionSyd13._2.View
 {

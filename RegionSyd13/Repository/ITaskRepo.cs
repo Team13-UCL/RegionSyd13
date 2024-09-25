@@ -4,8 +4,9 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RegionSyd13._1.Model;
 
-namespace RegionSyd13._1.Model
+namespace RegionSyd13.Repository
 {
     public interface ITaskRepo
     {
@@ -15,6 +16,6 @@ namespace RegionSyd13._1.Model
         void EditTask(Task updatedTask);
         void DeleteTask(int taskID);
 
-        
+
     }
 }
