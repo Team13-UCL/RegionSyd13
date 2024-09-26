@@ -14,23 +14,41 @@ namespace RegionSyd13._3.ViewModel
 {
     public class LoginViewModel : CurrentUser
     {
-        public LoginViewModel()
+        public LoginViewModel(IRepo<User> repository)
         {
-            this._userRepo = _userRepo ?? throw new ArgumentNullException(nameof(_userRepo));
+            this.repository = repository ?? throw new ArgumentNullException(nameof(repository));
             _users = new List<User>(RegionUsers(CurrentRegion));
         }
-        private readonly IRepo<User> _userRepo;
+        private readonly IRepo<User> repository;
         private List<User> _users;
-        public string Username { get; set; }
-        public string Password { get; set; }
+        private string _username;
+        public string Username 
+        { 
+            get { return _username; }
+            set 
+            { 
+                _username = value;
+                OnPropertyChanged();
+            }
+        }
+        private string _password;
+        public string Password 
+        { 
+            get { return _password; }
+            set 
+            { 
+                _password = value; 
+                OnPropertyChanged(); 
+            }
+        }
         public List<User> RegionUsers(Region reg)
         {
-            List<User> users = new List<User>(_userRepo.GetAll());
-            foreach (var user in _users)
-            {
-                if (user.RegionID != reg.RegID)
-                    users.Remove(user);
-            }
+            List<User> users = new List<User>(repository.GetAll());
+            //foreach (var user in users)
+            //{
+            //    if (user.RegionID != reg.RegID)
+            //        users.Remove(user);
+            //}
             return users;
         }
         public void Login(string username, string password)
@@ -54,7 +72,12 @@ namespace RegionSyd13._3.ViewModel
                 authentication = true;
             return authentication;
         }
-        public RelayCommand LoginCommand => new RelayCommand(execute => Authenticate(), CanExecute => (Username != null && Password != null));
+        private bool filled()
+        {
+            if (Password != null && Username != null) { return true; }
+            else return false;
+        }
+        public RelayCommand LoginCommand => new RelayCommand(execute => Authenticate(), CanExecute => filled() == true);
         
     }
 }

@@ -45,7 +45,7 @@ namespace RegionSyd13.Repository
         public IEnumerable<User> GetAll()
         {
             var users = new List<User>();
-            string query = "SELECT * FROM User";
+            string query = "SELECT * FROM [User]";
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
@@ -59,8 +59,9 @@ namespace RegionSyd13.Repository
                         users.Add(new User
                         {
                             UserID = (int)reader["UserID"],
-                            UserName = (string)reader["Username"],
-                            Password = (string)reader["Password"]
+                            UserName = (string)reader["UserName"],
+                            Password = (string)reader["Password"],
+                            RegionID = (int)reader["RegionID"]
                         });
                     }
                 }

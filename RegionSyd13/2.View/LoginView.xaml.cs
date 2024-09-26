@@ -26,9 +26,11 @@ namespace RegionSyd13._2.View
     public partial class LoginView : Window
     {
         LoginViewModel vm;
+        
         public LoginView()
         {
-            vm = new LoginViewModel();
+            var UserRepo = new Repository.UserRepo();
+            vm = new LoginViewModel(UserRepo);
             InitializeComponent();
             DataContext = vm;
         }

@@ -18,8 +18,8 @@ namespace RegionSyd13.Repository
         }
         public void Add(Region entity)
             {
-                string query = "INSERT INTO Region (RegID, RegName)\n" +
-                    "VALUES (@RegID, @RegName)";
+                string query = "INSERT INTO Region (RegionID, Name)\n" +
+                    "VALUES (@RegionID, @Name)";
 
                 using (SqlConnection connection = new SqlConnection(_connectionString))
                 {
@@ -33,12 +33,12 @@ namespace RegionSyd13.Repository
 
             public void Delete(int id)
             {
-            string query = "DELETE FROM PRODUCT WHERE RegID = @RegID";
+            string query = "DELETE FROM PRODUCT WHERE RegionID = @RegionID";
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("RegID", id);
+                command.Parameters.AddWithValue("RegionID", id);
                 connection.Open();
                 command.ExecuteNonQuery();
             }
@@ -61,7 +61,7 @@ namespace RegionSyd13.Repository
                             {
                                 
                                 RegID = (int)reader["RegionID"],
-                                RegName = (string)reader["RegionName"]
+                                RegName = (string)reader["Name"]
                                 
                             });
                         }
@@ -74,12 +74,12 @@ namespace RegionSyd13.Repository
             public Region GetById(int id)
             {
                 Region region = null;
-                string query = "SELECT * FROM Region WHERE RegID = @RegID";
+                string query = "SELECT * FROM Region WHERE RegionID = @RegionID";
 
                 using (SqlConnection connection = new SqlConnection(_connectionString))
                 {
                     SqlCommand command = new SqlCommand(query, connection);
-                    command.Parameters.AddWithValue("@RegID", id);
+                    command.Parameters.AddWithValue("@RegionID", id);
                     connection.Open();
 
                     using (SqlDataReader reader = command.ExecuteReader())
@@ -89,7 +89,7 @@ namespace RegionSyd13.Repository
                             region = new Region
                             {
                                 RegID = (int)reader["RegionID"],
-                                RegName = (string)reader["RegionName"]
+                                RegName = (string)reader["Name"]
                             };
                         }
                     }
@@ -101,14 +101,14 @@ namespace RegionSyd13.Repository
             public void Update(Region entity)
             {
             string query = "UPDATE Region \n " +
-            "SET RegName = @RegName, RegID = @RegID\n" +
-            "WHERE RegID = @RegID";
+            "SET Name = @Name, RegionID = @RegionID\n" +
+            "WHERE RegionID = @RegionID";
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@RegID", entity.RegID);
-                command.Parameters.AddWithValue("@RegName", entity.RegName);                                
+                command.Parameters.AddWithValue("@RegionID", entity.RegID);
+                command.Parameters.AddWithValue("@Name", entity.RegName);                                
                 connection.Open();
                 command.ExecuteNonQuery();
             }

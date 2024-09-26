@@ -35,9 +35,10 @@
             <StackPanel Margin="0,10">
                 <TextBlock Text="Password"
                            FontSize="14" />
-                <PasswordBox x:Name="PasswordBox"
+                <TextBox x:Name="PasswordBox"
                              Width="250"
-                             Height="30"/>
+                             Height="30"
+                             Text="{Binding Password}"/>
             </StackPanel>
             <TextBlock Width="248"
                        Height="23"><Hyperlink NavigateUri="https://ambulancesyd.dk/"
@@ -49,6 +50,7 @@
                     Height="30"
                     Background="Gray"
                     Foreground="White" Command="{Binding LoginCommand}" Click="LoginButton_Click"
+                    IsEnabled="{Binding LoginCommand}"
                     />
         </StackPanel>
     </Grid>
