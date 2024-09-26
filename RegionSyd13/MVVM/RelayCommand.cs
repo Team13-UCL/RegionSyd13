@@ -10,17 +10,22 @@ namespace RegionSyd13.MVVM
     public class RelayCommand : ICommand
     {
         private Action<object> execute;
+        private Func<object, bool> canExecute;
 
-        public RelayCommand(Action<object> executeAction)
+        public event EventHandler CanExecuteChanged
         {
-            execute = executeAction;
+            add { CommandManager.RequerySuggested += value; }
+            remove { CommandManager.RequerySuggested -= value; }
         }
-
-        public event EventHandler CanExecuteChanged;
+        public RelayCommand(Action<object> execute, Func<object, bool> canExecute = null)
+        {
+            this.execute = execute;
+            this.canExecute = canExecute;
+        }
 
         public bool CanExecute(object parameter)
         {
-            return true;
+            return canExecute == null || canExecute(parameter);
         }
 
         public void Execute(object parameter)

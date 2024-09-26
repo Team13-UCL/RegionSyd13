@@ -8,7 +8,7 @@ namespace RegionSyd13._1.Model
 {
     public class Region
     {
-        public string RegID { get; set; }
+        public int RegID { get; set; }
         public string RegName { get; set; }
     }
 }

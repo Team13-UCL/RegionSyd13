@@ -9,13 +9,12 @@ namespace RegionSyd13.Repository
 {
     internal class TaskRepo : IRepo<Task>
     {
-        private readonly string _connectionString;
 
-        public TaskRepo(string connectionString)
+        private readonly string _connectionString;
+        public TaskRepo()
         {
             _connectionString = Connection.ConnectionString;
         }
-
         // Add a new Task
         public void Add(Task entity)
         {
@@ -68,7 +67,7 @@ namespace RegionSyd13.Repository
                         tasks.Add(new Task
                         {
                             TaskID = (int)reader["TaskID"],
-                            RegTaskID = (string)reader["RegTaskID"],
+                            RegTaskID = (int)reader["RegTaskID"],
                             TaskType = (string)reader["Type"],
                             TaskDescription = (string)reader["Description"],
                             ServiceGoals = (string)reader["ServiceGoals"],
@@ -100,7 +99,7 @@ namespace RegionSyd13.Repository
                         task = new Task
                         {
                             TaskID = (int)reader["TaskID"],
-                            RegTaskID = (string)reader["RegTaskID"],
+                            RegTaskID = (int)reader["RegTaskID"],
                             TaskType = (string)reader["Type"],
                             TaskDescription = (string)reader["Description"],
                             ServiceGoals = (string)reader["ServiceGoals"],

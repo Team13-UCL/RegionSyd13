@@ -22,7 +22,7 @@ namespace RegionSyd13._2.View
     /// </summary>
     public partial class TaskListView : Window
     {
-        private TaskBankViewModel taskBankViewModel = new TaskBankViewModel(TaskRepo.GetInstance());
+        private TaskBankViewModel taskBankViewModel = new TaskBankViewModel();
 
         public TaskListView()
         {
@@ -39,7 +39,7 @@ namespace RegionSyd13._2.View
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            TaskBankView taskBankView = new TaskBankView();
+            AddTaskView taskBankView = new AddTaskView();
             taskBankView.Show();
             this.Close();
 
@@ -48,7 +48,7 @@ namespace RegionSyd13._2.View
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             
-            TaskBankView taskBankView = new TaskBankView();
+            AddTaskView taskBankView = new AddTaskView();
             taskBankView.Show();
             this.Close();
         }

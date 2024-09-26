@@ -25,15 +25,13 @@ namespace RegionSyd13._2.View
     /// </summary>
     public partial class LoginView : Window
     {
-       
-        private TaskBankViewModel taskBankViewModel;
-
+        LoginViewModel vm;
         public LoginView()
         {
+            vm = new LoginViewModel();
             InitializeComponent();
-            taskBankViewModel = new TaskBankViewModel(TaskRepo.GetInstance());
+            DataContext = vm;
         }
-
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
         {
             Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri) { UseShellExecute = true });
@@ -42,39 +40,68 @@ namespace RegionSyd13._2.View
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            //Database connection
-            using (SqlConnection con = new SqlConnection(@"Data Source=hedhed.database.windows.net;Initial Catalog=Login_RegionSyd13;User ID=Featherlance;Password=Nisse197512"))
+            if (vm.Authenticate() == true)
             {
-                con.Open();
-
-                // Prepare query using parameters
-                string query = "SELECT Username, Password FROM UserTable WHERE Username = @username AND Password = @password";
-
-                // Create SQL command with parameters to prevent SQL injection
-                using (SqlCommand cmd = new SqlCommand(query, con))
-                {
-                    cmd.Parameters.AddWithValue("@username", UserIdTextBox.Text);
-                    cmd.Parameters.AddWithValue("@password", PasswordBox.Password);
-
-                    SqlDataAdapter da = new SqlDataAdapter(cmd);
-                    DataTable dt = new DataTable();
-                    da.Fill(dt);
-
-                    if (dt.Rows.Count > 0)
-                    {
-                        MessageBox.Show("Login Success");
-                        // Proceed to the next view, for example:
-                        TaskListView taskListView = new TaskListView(taskBankViewModel);
-                        taskListView.Show();
-                        this.Close();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Login Failed");
-                    }
-                }
+                MessageBox.Show("Login Success");
+                TaskListView taskListView = new TaskListView();
+                taskListView.Show();
+                this.Close();
             }
-            
+            else
+            {
+                MessageBox.Show("Login Failed");
+            }
         }
+
+        //private TaskBankViewModel taskBankViewModel;
+
+        //public LoginView()
+        //{
+        //    InitializeComponent();
+        //    taskBankViewModel = new TaskBankViewModel(TaskRepo.GetInstance());
+        //}
+
+        //private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
+        //{
+        //    Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri) { UseShellExecute = true });
+        //    e.Handled = true;
+        //}
+
+        //private void LoginButton_Click(object sender, RoutedEventArgs e)
+        //{
+        //    //Database connection
+        //    using (SqlConnection con = new SqlConnection(@"Data Source=hedhed.database.windows.net;Initial Catalog=Login_RegionSyd13;User ID=Featherlance;Password=Nisse197512"))
+        //    {
+        //        con.Open();
+
+        //        // Prepare query using parameters
+        //        string query = "SELECT Username, Password FROM UserTable WHERE Username = @username AND Password = @password";
+
+        //        // Create SQL command with parameters to prevent SQL injection
+        //        using (SqlCommand cmd = new SqlCommand(query, con))
+        //        {
+        //            cmd.Parameters.AddWithValue("@username", UserIdTextBox.Text);
+        //            cmd.Parameters.AddWithValue("@password", PasswordBox.Password);
+
+        //            SqlDataAdapter da = new SqlDataAdapter(cmd);
+        //            DataTable dt = new DataTable();
+        //            da.Fill(dt);
+
+        //            if (dt.Rows.Count > 0)
+        //            {
+        //                MessageBox.Show("Login Success");
+        //                // Proceed to the next view, for example:
+        //                TaskListView taskListView = new TaskListView(taskBankViewModel);
+        //                taskListView.Show();
+        //                this.Close();
+        //            }
+        //            else
+        //            {
+        //                MessageBox.Show("Login Failed");
+        //            }
+        //        }
+        //    }
+
+        //}
     }
 }

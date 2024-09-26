@@ -14,14 +14,13 @@ namespace RegionSyd13._1.Model
         public string PostalCode { get; set; }
         public string Street { get; set; }
         public string HouseNumber { get; set; }
-        public int date { get; set; }
-        public int time { get; set; }
+        public DateOnly date { get; set; }
+        public TimeOnly time { get; set; }
 
 
-        //public string GetFullAddress()
-        //{
-        //    return $"{StreetName,HouseNumber, City, PostalCode}";
-        //}
-
+        public string GetAdress()
+        {
+            return $"{Street} {HouseNumber}, {PostalCode}, {City}";
+        }
     }
 }

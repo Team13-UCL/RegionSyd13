@@ -9,7 +9,7 @@ namespace RegionSyd13.Repository
     {
         private readonly string _connectionString;
 
-        public PatientRepo(string connectionString)
+        public PatientRepo()
         {
             _connectionString = Connection.ConnectionString;
         }

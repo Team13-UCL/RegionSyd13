@@ -11,12 +11,12 @@ namespace RegionSyd13.Repository
 
     internal class RegionRepo : IRepo<Region>
         {
-            private readonly string _connectionString;
-            public RegionRepo(string connectionString)
-            {
-                 _connectionString = Connection.ConnectionString;
-            }
-            public void Add(Region entity)
+        private readonly string _connectionString;
+        public RegionRepo()
+        {
+            _connectionString = Connection.ConnectionString;
+        }
+        public void Add(Region entity)
             {
                 string query = "INSERT INTO Region (RegID, RegName)\n" +
                     "VALUES (@RegID, @RegName)";
@@ -60,8 +60,8 @@ namespace RegionSyd13.Repository
                             regions.Add(new Region
                             {
                                 
-                                RegID = (string)reader["FirstName"],
-                                RegName = (string)reader["LastName"]
+                                RegID = (int)reader["RegionID"],
+                                RegName = (string)reader["RegionName"]
                                 
                             });
                         }
@@ -88,8 +88,8 @@ namespace RegionSyd13.Repository
                         {
                             region = new Region
                             {
-                                RegID = (string)reader["FirstName"],
-                                RegName = (string)reader["LastName"]
+                                RegID = (int)reader["RegionID"],
+                                RegName = (string)reader["RegionName"]
                             };
                         }
                     }

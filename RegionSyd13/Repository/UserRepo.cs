@@ -7,13 +7,12 @@ namespace RegionSyd13.Repository
 {
     internal class UserRepo : IRepo<User>
     {
-        private readonly string _connectionString;
 
-        public UserRepo(string connectionString)
+        private readonly string _connectionString;
+        public UserRepo()
         {
             _connectionString = Connection.ConnectionString;
         }
-
         public void Add(User entity)
         {
             string query = "INSERT INTO User (UserID, Username, Password) " +

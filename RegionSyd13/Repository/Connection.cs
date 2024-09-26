@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RegionSyd13.Repository
 {
-    public class Connection
+    public static class Connection
     {
         public static string ConnectionString { get; private set; }
 

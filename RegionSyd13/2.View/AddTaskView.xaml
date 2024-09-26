@@ -1,14 +1,11 @@
-﻿<Window x:Class="RegionSyd13._2.View.TaskBankView"
+﻿<Window x:Class="RegionSyd13._2.View.AddTaskView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:RegionSyd13" xmlns:_3.ViewModel="clr-namespace:RegionSyd13._3.ViewModel" d:DataContext="{d:DesignInstance Type=_3.ViewModel:TaskBankViewModel}"
+        xmlns:local="clr-namespace:RegionSyd13._2.View"
         mc:Ignorable="d"
-        Title="TaskBankView" Height="435" Width="300"
-        WindowStartupLocation="CenterScreen">
-       
-
+        Title="AddTaskView" Height="435" Width="300">
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -27,13 +24,13 @@
         </Grid.RowDefinitions>
 
         <Image Source="/ambulancesyd.png" Width="125" Height="75" 
-               HorizontalAlignment="Left" VerticalAlignment="Top" />
+           HorizontalAlignment="Left" VerticalAlignment="Top" />
 
-        
+
         <!--alle textboxe har en textblock koblet på, så den viser en text indtil der bliver skrevet i den, nemmeste måde jeg lige ku se, der er nok en nemmere måde, men det her virker-->
         <!-- Region ID input -->
         <TextBox x:Name="tbRegionalTaskID" Grid.Row="1" Margin="0,5" Text="{Binding RegionalTaskID, UpdateSourceTrigger=PropertyChanged}" Foreground="Gray"
-                  />
+              />
         <TextBlock IsHitTestVisible="False" Text="Region ID" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="6,0,0,0" Foreground="DarkGray" Grid.Row="1">
             <TextBlock.Style>
                 <Style TargetType="{x:Type TextBlock}">
@@ -169,6 +166,6 @@
 
         <!-- Opret opgave button -->
         <Button Grid.Row="10" Content="Opret opgave" Width="120" Height="30" Background="LightGreen" 
-                HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10" Click="Button_Click" Command="{Binding AddTaskCommand}"/>
+            HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10" Command="{Binding AddTaskCommand}"/>
     </Grid>
 </Window>

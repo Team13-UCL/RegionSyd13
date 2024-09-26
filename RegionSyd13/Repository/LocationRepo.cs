@@ -8,12 +8,10 @@ namespace RegionSyd13.Repository
     internal class LocationRepo : IRepo<Location>
     {
         private readonly string _connectionString;
-
-        public LocationRepo(string connectionString)
+        public LocationRepo()
         {
             _connectionString = Connection.ConnectionString;
         }
-
         public void Add(Location entity)
         {
             string query = "INSERT INTO Location (LocationID, City, PostalCode, Street, HouseNumber, Date, Time) " +
@@ -68,8 +66,8 @@ namespace RegionSyd13.Repository
                             PostalCode = (string)reader["PostalCode"],
                             Street = (string)reader["Street"],
                             HouseNumber = (string)reader["HouseNumber"],
-                            date = (int)reader["Date"],
-                            time = (int)reader["Time"]
+                            date = (DateOnly)reader["Date"],
+                            time = (TimeOnly)reader["Time"]
                         });
                     }
                 }
@@ -100,8 +98,8 @@ namespace RegionSyd13.Repository
                             PostalCode = (string)reader["PostalCode"],
                             Street = (string)reader["Street"],
                             HouseNumber = (string)reader["HouseNumber"],
-                            date = (int)reader["Date"],
-                            time = (int)reader["Time"]
+                            date = (DateOnly)reader["Date"],
+                            time = (TimeOnly)reader["Time"]
                         };
                     }
                 }
