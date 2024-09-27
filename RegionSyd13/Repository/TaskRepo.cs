@@ -19,8 +19,8 @@ namespace RegionSyd13.Repository
         // Add a new Task
         public void Add(Task entity)
         {
-            string query = "INSERT INTO Task (TaskID, RegTaskID, Type, Description, ServiceGoals, PatientID, LocationID, RegionID) " +
-                           "VALUES (@TaskID, @RegTaskID, @Type, @Description, @ServiceGoals, @PatientID, @LocationID, @RegionID)";
+            string query = "INSERT INTO Task (TaskID, RegTaskID, Type, Description, ServiceGoal, PatientID, LocationID, RegionID) " +
+                           "VALUES (@TaskID, @RegTaskID, @Type, @Description, @ServiceGoal, @PatientID, @LocationID, @RegionID)";
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
@@ -29,7 +29,7 @@ namespace RegionSyd13.Repository
                 command.Parameters.AddWithValue("@RegTaskID", entity.RegTaskID);
                 command.Parameters.AddWithValue("@Type", entity.TaskType);
                 command.Parameters.AddWithValue("@Description", entity.TaskDescription);
-                command.Parameters.AddWithValue("@ServiceGoals", entity.ServiceGoals);                
+                command.Parameters.AddWithValue("@ServiceGoal", entity.ServiceGoal);                
 
                 connection.Open();
                 command.ExecuteNonQuery();
@@ -68,10 +68,10 @@ namespace RegionSyd13.Repository
                         tasks.Add(new Task
                         {
                             TaskID = (int)reader["TaskID"],
-                            RegTaskID = (int)reader["RegTaskID"],
+                            RegTaskID = (string)reader["RegTaskID"],
                             TaskType = (string)reader["Type"],
                             TaskDescription = (string)reader["Description"],
-                            ServiceGoals = (string)reader["ServiceGoals"],
+                            ServiceGoal = (string)reader["ServiceGoal"],
                             
                         });
                     }
@@ -98,14 +98,13 @@ namespace RegionSyd13.Repository
                     if (reader.Read())
                     {
                         task = new Task
-                        (
-                            (int)reader["TaskID"],
-                            (string)reader["RegTaskID"],
-                            (string)reader["Type"],
-                            (string)reader["Description"],
-                            (string)reader["ServiceGoals"]
-                            
-                        );
+                        {
+                            TaskID = (int)reader["TaskID"],
+                            RegTaskID = (string)reader["RegTaskID"],
+                            TaskType = (string)reader["Type"],
+                            TaskDescription = (string)reader["Description"]
+
+                        };
                     }
                 }
             }
@@ -117,7 +116,7 @@ namespace RegionSyd13.Repository
         public void Update(Task entity)
         {
             string query = "UPDATE Task SET RegTaskID = @RegTaskID, Type = @Type, Description = @Description, " +
-                           "ServiceGoals = @ServiceGoals" +
+                           "ServiceGoal = @ServiceGoal" +
                            "WHERE TaskID = @TaskID";
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
@@ -126,8 +125,7 @@ namespace RegionSyd13.Repository
                 command.Parameters.AddWithValue("@TaskID", entity.TaskID);
                 command.Parameters.AddWithValue("@RegTaskID", entity.RegTaskID);
                 command.Parameters.AddWithValue("@Type", entity.TaskType);
-                command.Parameters.AddWithValue("@Description", entity.TaskDescription);
-                command.Parameters.AddWithValue("@ServiceGoals", entity.ServiceGoals);               
+                command.Parameters.AddWithValue("@Description", entity.TaskDescription);            
 
                 connection.Open();
                 command.ExecuteNonQuery();

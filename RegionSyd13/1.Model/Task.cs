@@ -46,6 +46,7 @@ namespace RegionSyd13._1.Model
         }
         public string RegTaskID {  get; set; }
         public int TaskID { get; set; }
+        public int PatientID { get; set; }
 
         public string TaskType { get; set; }
 
@@ -55,14 +56,16 @@ namespace RegionSyd13._1.Model
         public void GetLocations()
         {
             var locations = new List<Location>(locationRepo.GetAll());
-            foreach (var location in locations) {
+            foreach (var location in locations)
+            {
                 if (location.TaskID == this.TaskID)
                 {
-                    if(location.Destsination == "start")
+                    if (location.Destsination == "start")
                         Start = location;
                     else Stop = location;
                 }
-                  
+            }
+        }
 
     }
 }

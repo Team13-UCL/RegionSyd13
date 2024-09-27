@@ -38,7 +38,7 @@ namespace RegionSyd13._2.View
         }
         
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void AddTaskClick(object sender, RoutedEventArgs e)
         {
             AddTaskView taskBankView = new AddTaskView();
             taskBankView.Show();
@@ -46,7 +46,7 @@ namespace RegionSyd13._2.View
 
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void EditClick(object sender, RoutedEventArgs e)
         {
             
             AddTaskView taskBankView = new AddTaskView();
