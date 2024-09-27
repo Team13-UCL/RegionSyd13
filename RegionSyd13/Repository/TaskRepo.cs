@@ -15,6 +15,7 @@ namespace RegionSyd13.Repository
         {
             _connectionString = Connection.ConnectionString;
         }
+
         // Add a new Task
         public void Add(Task entity)
         {
@@ -97,14 +98,14 @@ namespace RegionSyd13.Repository
                     if (reader.Read())
                     {
                         task = new Task
-                        {
-                            TaskID = (int)reader["TaskID"],
-                            RegTaskID = (int)reader["RegTaskID"],
-                            TaskType = (string)reader["Type"],
-                            TaskDescription = (string)reader["Description"],
-                            ServiceGoals = (string)reader["ServiceGoals"],
+                        (
+                            (int)reader["TaskID"],
+                            (string)reader["RegTaskID"],
+                            (string)reader["Type"],
+                            (string)reader["Description"],
+                            (string)reader["ServiceGoals"]
                             
-                        };
+                        );
                     }
                 }
             }

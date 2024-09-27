@@ -41,7 +41,7 @@
         <!-- DataGrid replacing ListView -->
         <DataGrid Grid.Column="0" Grid.Row="1" Margin="10,10,5,0" CanUserAddRows="False" CanUserDeleteRows="False" AutoGenerateColumns="False" ItemsSource="{Binding Tasks}" SelectedItem="{Binding SelectedTask, Mode=TwoWay}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Region ID" Binding="{Binding RegionalTaskID, UpdateSourceTrigger=PropertyChanged}" Width="4*" />
+                <DataGridTextColumn Header="Region ID" Binding="{Binding RegTaskID, UpdateSourceTrigger=PropertyChanged}" Width="4*" />
                 <DataGridTextColumn Header="Opgavetype" Binding="{Binding TaskType, UpdateSourceTrigger=PropertyChanged}" />
                 <DataGridTextColumn Header="Opgavebeskrivelse" Binding="{Binding TaskDescription, UpdateSourceTrigger=PropertyChanged}" />
                 <DataGridTextColumn Header="Patient noter/håndtering" Binding="{Binding PatientNotes, UpdateSourceTrigger=PropertyChanged}" />

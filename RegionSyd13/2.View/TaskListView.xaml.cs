@@ -22,12 +22,13 @@ namespace RegionSyd13._2.View
     /// </summary>
     public partial class TaskListView : Window
     {
-        private TaskBankViewModel taskBankViewModel = new TaskBankViewModel();
-
+        TaskListViewModel vm;
         public TaskListView()
         {
+            var taskRepo = new Repository.TaskRepo();
+            vm = new TaskListViewModel(taskRepo);
             InitializeComponent();
-            DataContext = taskBankViewModel;
+            DataContext = vm;
         }
 
         public TaskListView(TaskBankViewModel viewModel)

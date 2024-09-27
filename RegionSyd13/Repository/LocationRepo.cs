@@ -11,6 +11,12 @@ namespace RegionSyd13.Repository
         public LocationRepo()
         {
             _connectionString = Connection.ConnectionString;
+            locations = new List<Location>(GetAll());
+        }
+        List<Location> locations;
+        public Location GetLocation(int id)
+        {
+            return locations.FirstOrDefault(i => i.LocationID == id);
         }
         public void Add(Location entity)
         {

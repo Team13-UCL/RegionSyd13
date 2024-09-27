@@ -10,6 +10,8 @@ namespace RegionSyd13._1.Model
     public class Location
     {
         public int LocationID { get; set; }
+        public int TaskID {  get; set; }
+        public string Destination { get; set; }
         public string City { get; set; }
         public string PostalCode { get; set; }
         public string Street { get; set; }

@@ -10,12 +10,12 @@ using Task = RegionSyd13._1.Model.Task;
 
 namespace RegionSyd13._3.ViewModel
 {
-    public class TaskListViewModel : ViewModelBase
+    public class TaskListViewModel : CurrentUser
     {
         private readonly IRepo<Task> taskRepo;
         public ObservableCollection<Task> Tasks { get; set; }
         public Task SelectedTask { get; set; }
-        public TaskListViewModel()
+        public TaskListViewModel(IRepo<Task> repository)
         {
             this.taskRepo = taskRepo ?? throw new ArgumentNullException(nameof(taskRepo));
             Tasks = new ObservableCollection<Task>(taskRepo.GetAll());

@@ -5,13 +5,20 @@ using RegionSyd13._1.Model;
 
 namespace RegionSyd13.Repository
 {
-    internal class PatientRepo : IRepo<Patient>
+    public class PatientRepo : IRepo<Patient>
     {
         private readonly string _connectionString;
 
         public PatientRepo()
         {
             _connectionString = Connection.ConnectionString;
+            
+        }
+        
+        public Patient GetPatient(int id)
+        {
+            List<Patient> _patients = new List<Patient>(GetAll());
+            return _patients.FirstOrDefault(i => i.PatientID == id);
         }
 
         // Add a new Patient
