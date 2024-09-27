@@ -28,8 +28,7 @@ namespace RegionSyd13.Repository
                 command.Parameters.AddWithValue("@TaskID", entity.TaskID);
                 command.Parameters.AddWithValue("@RegTaskID", entity.RegTaskID);
                 command.Parameters.AddWithValue("@Type", entity.TaskType);
-                command.Parameters.AddWithValue("@Description", entity.TaskDescription);
-                command.Parameters.AddWithValue("@ServiceGoal", entity.ServiceGoal);                
+                command.Parameters.AddWithValue("@Description", entity.TaskDescription);               
 
                 connection.Open();
                 command.ExecuteNonQuery();
@@ -66,14 +65,14 @@ namespace RegionSyd13.Repository
                     while (reader.Read())
                     {
                         tasks.Add(new Task
-                        {
-                            TaskID = (int)reader["TaskID"],
-                            RegTaskID = (string)reader["RegTaskID"],
-                            TaskType = (string)reader["Type"],
-                            TaskDescription = (string)reader["Description"],
-                            ServiceGoal = (string)reader["ServiceGoal"],
+                        (
+                            (int)reader["TaskID"],
+                            (int)reader["PatientID"],
+                            (string)reader["RegTaskID"],
+                            (string)reader["Type"],
+                            (string)reader["Description"]
                             
-                        });
+                        ));
                     }
                 }
             }

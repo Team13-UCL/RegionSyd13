@@ -50,7 +50,8 @@
                     Width="250"
                     Height="30"
                     Background="Gray"
-                    Foreground="White" Command="{Binding LoginCommand}" Click="LoginButton_Click"/>
+                    Foreground="White" Command="{Binding LoginCommand}" Click="LoginButton_Click"
+                    IsDefault="True"/>
         </StackPanel>
     </Grid>
 </Window>

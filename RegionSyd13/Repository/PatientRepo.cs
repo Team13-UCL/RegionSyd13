@@ -14,12 +14,6 @@ namespace RegionSyd13.Repository
             _connectionString = Connection.ConnectionString;
             
         }
-        
-        public Patient GetPatient(int id)
-        {
-            List<Patient> _patients = new List<Patient>(GetAll());
-            return _patients.FirstOrDefault(i => i.PatientID == id);
-        }
 
         // Add a new Patient
         public void Add(Patient entity)

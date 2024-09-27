@@ -11,7 +11,8 @@ namespace RegionSyd13._1.Model
 {
     public class Task
     {
-        private readonly PatientRepo patientRepo;
+        PatientRepo PatientRepo = new PatientRepo();
+        private readonly IRepo<Patient> patientRepo;
         private readonly LocationRepo locationRepo;
         public Task(int taskID, int patientID, string regtaskID, string Type, string Description)
         {
@@ -19,11 +20,15 @@ namespace RegionSyd13._1.Model
             TaskType = Type;
             TaskDescription = Description;
             RegTaskID = regtaskID;
-            var patientRepo = new PatientRepo();
-            Patient = patientRepo.GetPatient(patientID);
+            var patientRepo = PatientRepo ?? throw new ArgumentNullException(nameof(PatientRepo));
+            Patient = patientRepo.GetById(patientID);
             var locationRepo = new LocationRepo();
 
 
+        }
+        public Task()
+        {
+            
         }
         public Location Start {  get; set; }
         public Location Stop { get; set; }
@@ -60,7 +65,7 @@ namespace RegionSyd13._1.Model
             {
                 if (location.TaskID == this.TaskID)
                 {
-                    if (location.Destsination == "start")
+                    if (location.Destination == "start")
                         Start = location;
                     else Stop = location;
                 }
