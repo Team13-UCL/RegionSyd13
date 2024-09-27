@@ -12,13 +12,13 @@ namespace RegionSyd13._3.ViewModel
 {
     public class TaskListViewModel : ViewModelBase
     {
-        private readonly IRepo<Task> taskRepo;
-        public ObservableCollection<Task> Tasks { get; set; }
+        private readonly IRepo<Task> repository;
+        public ObservableCollection<Task> _tasks { get; set; }
         public Task SelectedTask { get; set; }
-        public TaskListViewModel()
+        public TaskListViewModel(IRepo<Task> repository)
         {
-            this.taskRepo = taskRepo ?? throw new ArgumentNullException(nameof(taskRepo));
-            Tasks = new ObservableCollection<Task>(taskRepo.GetAll());
+            this.repository = repository ?? throw new ArgumentNullException(nameof(repository));
+            _tasks = new ObservableCollection<Task>(repository.GetAll());
         }
     }
 

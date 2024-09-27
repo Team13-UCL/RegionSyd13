@@ -22,12 +22,15 @@ namespace RegionSyd13._2.View
     /// </summary>
     public partial class TaskListView : Window
     {
-        private TaskBankViewModel taskBankViewModel = new TaskBankViewModel();
+        TaskListViewModel vm;
+
 
         public TaskListView()
         {
+            var TaskRepo = new Repository.TaskRepo();
+            vm = new TaskListViewModel(TaskRepo);
             InitializeComponent();
-            DataContext = taskBankViewModel;
+            DataContext = vm;
         }
 
         public TaskListView(TaskBankViewModel viewModel)
@@ -37,7 +40,7 @@ namespace RegionSyd13._2.View
         }
         
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void AddTaskClick(object sender, RoutedEventArgs e)
         {
             AddTaskView taskBankView = new AddTaskView();
             taskBankView.Show();
@@ -45,7 +48,7 @@ namespace RegionSyd13._2.View
 
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void EditClick(object sender, RoutedEventArgs e)
         {
             
             AddTaskView taskBankView = new AddTaskView();

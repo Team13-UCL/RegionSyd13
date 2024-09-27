@@ -39,16 +39,16 @@
        HorizontalAlignment="Left" VerticalAlignment="Top" />
 
         <!-- DataGrid replacing ListView -->
-        <DataGrid Grid.Column="0" Grid.Row="1" Margin="10,10,5,0" CanUserAddRows="False" CanUserDeleteRows="False" AutoGenerateColumns="False" ItemsSource="{Binding Tasks}" SelectedItem="{Binding SelectedTask, Mode=TwoWay}">
+        <DataGrid Grid.Column="0" Grid.Row="1" Margin="10,10,5,0" CanUserAddRows="False" CanUserDeleteRows="False" AutoGenerateColumns="False" ItemsSource="{Binding _tasks}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Region ID" Binding="{Binding RegionalTaskID, UpdateSourceTrigger=PropertyChanged}" Width="4*" />
+                <DataGridTextColumn Header="Region ID" Binding="{Binding RegTaskID, UpdateSourceTrigger=PropertyChanged}" Width="4*" />
                 <DataGridTextColumn Header="Opgavetype" Binding="{Binding TaskType, UpdateSourceTrigger=PropertyChanged}" />
                 <DataGridTextColumn Header="Opgavebeskrivelse" Binding="{Binding TaskDescription, UpdateSourceTrigger=PropertyChanged}" />
-                <DataGridTextColumn Header="Patient noter/håndtering" Binding="{Binding PatientNotes, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Header="Patient noter/håndtering" Binding="{Binding Patient, UpdateSourceTrigger=PropertyChanged}" />
                 <DataGridTextColumn Header="afhentning" Binding="{Binding DateAndTimeForPickup, UpdateSourceTrigger=PropertyChanged}" />
                 <DataGridTextColumn Header="afsætning" Binding="{Binding DateAndTimeForDestination, UpdateSourceTrigger=PropertyChanged}" />
-                <DataGridTextColumn Header="Servicemål" Binding="{Binding ServiceTarget, UpdateSourceTrigger=PropertyChanged}" />
-                <DataGridTextColumn Header="Fra adresse" Binding="{Binding StartLocation, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Header="Servicemål" Binding="{Binding ServiceGoal, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Header="Fra adresse" Binding="{Binding Destination, UpdateSourceTrigger=PropertyChanged}" />
                 <DataGridTextColumn Header="Til adresse" Binding="{Binding Destination, UpdateSourceTrigger=PropertyChanged}" />
             </DataGrid.Columns>
         </DataGrid>
@@ -63,8 +63,8 @@
 
         <!-- Bottom buttons -->
         <StackPanel Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,10">
-            <Button Content="Opret opgave" Background="LightGreen" Width="100" Margin="5" Click="Button_Click"/>
-            <Button Content="Rediger opgave" Background="Yellow" Width="100" Margin="5" Command="{Binding EditTaskCommand}" CommandParameter="{Binding SelectedTask}" Click="Button_Click_1"/>
+            <Button Content="Opret opgave" Background="LightGreen" Width="100" Margin="5" Click="AddTaskClick"/>
+            <Button Content="Rediger opgave" Background="Yellow" Width="100" Margin="5" Command="{Binding EditTaskCommand}" CommandParameter="{Binding SelectedTask}" Click="EditClick"/>
             <Button Content="Slet opgave" Background="Red" Width="100" Margin="5" Command="{Binding DeleteTaskCommand}" CommandParameter="{Binding SelectedTask}"/>
         </StackPanel>
         <StackPanel Grid.Column="1" Grid.Row="1"/>

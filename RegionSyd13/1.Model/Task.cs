@@ -16,7 +16,7 @@ namespace RegionSyd13._1.Model
 
         public int TaskID { get; set; }
         public int PatientID { get; set; }
-        public int RegTaskID { get; set; }
+        public string RegTaskID { get; set; }
 
         public string TaskType { get; set; }
 
@@ -24,7 +24,7 @@ namespace RegionSyd13._1.Model
 
         public string Destination { get; set; }
 
-        public string ServiceGoals { get; set; }
+        public string ServiceGoal { get; set; }
 
         public void SetStart(Location start) { locations[0] = start; }
         public void SetEnd(Location end) { locations[1] = end; }
