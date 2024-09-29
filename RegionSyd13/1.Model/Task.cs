@@ -14,6 +14,7 @@ namespace RegionSyd13._1.Model
         PatientRepo PatientRepo = new PatientRepo();
         private readonly IRepo<Patient> patientRepo;
         private readonly LocationRepo locationRepo;
+        private bool _isInitialized = false;
         public Task(int taskID, int patientID, string regtaskID, string Type, string Description)
         {
             TaskID = taskID;
@@ -23,6 +24,7 @@ namespace RegionSyd13._1.Model
             var patientRepo = PatientRepo ?? throw new ArgumentNullException(nameof(PatientRepo));
             Patient = patientRepo.GetById(patientID);
             var locationRepo = new LocationRepo();
+            _isInitialized = true;
 
 
         }
@@ -37,17 +39,24 @@ namespace RegionSyd13._1.Model
         public Patient Patient 
         {
             get { return _patient; }
-            set 
+            set
             {
-                if (Patient == null)
+                if (_isInitialized)
                 {
-                    _patient = value;
-                    PatientRepo.Add(_patient);
+                    if (_patient == null)
+                    {
+                        _patient = value;
+                        patientRepo.Add(_patient);
+                    }
+                    else if (_patient != value)
+                    {
+                        _patient = value;
+                        patientRepo.Update(_patient);
+                    }
                 }
                 else
                 {
                     _patient = value;
-                    PatientRepo.Update(_patient);
                 }
             }
         }
