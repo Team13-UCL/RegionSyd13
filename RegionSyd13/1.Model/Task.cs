@@ -32,20 +32,22 @@ namespace RegionSyd13._1.Model
         }
         public Location Start {  get; set; }
         public Location Stop { get; set; }
+
+        private Patient _patient;
         public Patient Patient 
         {
-            get { return Patient; }
+            get { return _patient; }
             set 
             {
                 if (Patient == null)
                 {
-                    Patient = value;
-                    patientRepo.Add(Patient);
+                    _patient = value;
+                    PatientRepo.Add(_patient);
                 }
                 else
                 {
-                    Patient = value;
-                    patientRepo.Update(Patient);
+                    _patient = value;
+                    PatientRepo.Update(_patient);
                 }
             }
         }

@@ -44,7 +44,7 @@
                 <DataGridTextColumn Header="Region ID" Binding="{Binding RegTaskID, UpdateSourceTrigger=PropertyChanged}" Width="4*" />
                 <DataGridTextColumn Header="Opgavetype" Binding="{Binding TaskType, UpdateSourceTrigger=PropertyChanged}" />
                 <DataGridTextColumn Header="Opgavebeskrivelse" Binding="{Binding TaskDescription, UpdateSourceTrigger=PropertyChanged}" />
-                <DataGridTextColumn Header="Patient noter/håndtering" Binding="{Binding Patient, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Header="Patient noter/håndtering" Binding="{Binding Patient.HandlingNote, UpdateSourceTrigger=PropertyChanged}" />
                 <DataGridTextColumn Header="afhentning" Binding="{Binding DateAndTimeForPickup, UpdateSourceTrigger=PropertyChanged}" />
                 <DataGridTextColumn Header="afsætning" Binding="{Binding DateAndTimeForDestination, UpdateSourceTrigger=PropertyChanged}" />
                 <DataGridTextColumn Header="Servicemål" Binding="{Binding ServiceGoal, UpdateSourceTrigger=PropertyChanged}" />

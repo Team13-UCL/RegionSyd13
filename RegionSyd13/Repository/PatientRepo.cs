@@ -18,13 +18,13 @@ namespace RegionSyd13.Repository
         // Add a new Patient
         public void Add(Patient entity)
         {
-            string query = "INSERT INTO Patient (PatientID, FirstName, LastName, Type, HandlingNote) " +
-                           "VALUES (@PatientID, @FirstName, @LastName, @Type, @HandlingNote)";
+            string query = "INSERT INTO Patient (FirstName, LastName, Type, HandlingNote) " +
+                           "VALUES (@FirstName, @LastName, @Type, @HandlingNote)";
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@PatientID", entity.PatientID);
+                //command.Parameters.AddWithValue("@PatientID", entity.PatientID);
                 command.Parameters.AddWithValue("@FirstName", entity.FirstName);
                 command.Parameters.AddWithValue("@LastName", entity.LastName);
                 command.Parameters.AddWithValue("@Type", entity.Type);

@@ -20,8 +20,8 @@ namespace RegionSyd13.Repository
         }
         public void Add(Location entity)
         {
-            string query = "INSERT INTO Location (LocationID, City, PostalCode, Street, HouseNumber, Date, Time) " +
-                           "VALUES (@LocationID, @City, @PostalCode, @Street, @HouseNumber, @Date, @Time)";
+            string query = "INSERT INTO Location (LocationID, City, PostalCode, Street, Date, Time) " +
+                           "VALUES (@LocationID, @City, @PostalCode, @Street, @Date, @Time)";
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
@@ -30,7 +30,7 @@ namespace RegionSyd13.Repository
                 command.Parameters.AddWithValue("@City", entity.City);
                 command.Parameters.AddWithValue("@PostalCode", entity.PostalCode);
                 command.Parameters.AddWithValue("@Street", entity.Street);
-                command.Parameters.AddWithValue("@HouseNumber", entity.HouseNumber);
+               // command.Parameters.AddWithValue("@HouseNumber", entity.HouseNumber);
                 command.Parameters.AddWithValue("@Date", entity.date);
                 command.Parameters.AddWithValue("@Time", entity.time);
                 connection.Open();
@@ -65,15 +65,16 @@ namespace RegionSyd13.Repository
                 {
                     while (reader.Read())
                     {
+                        var dateTime = (DateTime)reader["Date"];
                         locations.Add(new Location
                         {
                             LocationID = (int)reader["LocationID"],
                             City = (string)reader["City"],
                             PostalCode = (string)reader["PostalCode"],
                             Street = (string)reader["Street"],
-                            HouseNumber = (string)reader["HouseNumber"],
-                            date = (DateOnly)reader["Date"],
-                            time = (TimeOnly)reader["Time"]
+                            //HouseNumber = (string)reader["HouseNumber"],
+                            date = DateOnly.FromDateTime(dateTime),
+                            time = TimeOnly.FromDateTime(dateTime)
                         });
                     }
                 }
@@ -103,7 +104,7 @@ namespace RegionSyd13.Repository
                             City = (string)reader["City"],
                             PostalCode = (string)reader["PostalCode"],
                             Street = (string)reader["Street"],
-                            HouseNumber = (string)reader["HouseNumber"],
+                            //HouseNumber = (string)reader["HouseNumber"],
                             date = (DateOnly)reader["Date"],
                             time = (TimeOnly)reader["Time"]
                         };
@@ -117,7 +118,7 @@ namespace RegionSyd13.Repository
         public void Update(Location entity)
         {
             string query = "UPDATE Location " +
-                           "SET City = @City, PostalCode = @PostalCode, Street = @Street, HouseNumber = @HouseNumber, Date = @Date, Time = @Time " +
+                           "SET City = @City, PostalCode = @PostalCode, Street = @Street, Date = @Date, Time = @Time " +
                            "WHERE LocationID = @LocationID";
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
@@ -127,7 +128,7 @@ namespace RegionSyd13.Repository
                 command.Parameters.AddWithValue("@City", entity.City);
                 command.Parameters.AddWithValue("@PostalCode", entity.PostalCode);
                 command.Parameters.AddWithValue("@Street", entity.Street);
-                command.Parameters.AddWithValue("@HouseNumber", entity.HouseNumber);
+                //command.Parameters.AddWithValue("@HouseNumber", entity.HouseNumber);
                 command.Parameters.AddWithValue("@Date", entity.date);
                 command.Parameters.AddWithValue("@Time", entity.time);
                 connection.Open();
