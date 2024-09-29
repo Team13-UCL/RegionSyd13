@@ -14,7 +14,7 @@ namespace RegionSyd13._1.Model
         PatientRepo PatientRepo = new PatientRepo();
         private readonly IRepo<Patient> patientRepo;
         private readonly LocationRepo locationRepo;
-        private bool _isInitialized = false;
+        private bool _isInitialized = false; // brugt til at sikre at Patient kun bliver opdateret når Task er blevet initialiseret
         public Task(int taskID, int patientID, string regtaskID, string Type, string Description)
         {
             TaskID = taskID;
@@ -24,7 +24,7 @@ namespace RegionSyd13._1.Model
             var patientRepo = PatientRepo ?? throw new ArgumentNullException(nameof(PatientRepo));
             Patient = patientRepo.GetById(patientID);
             var locationRepo = new LocationRepo();
-            _isInitialized = true;
+            _isInitialized = true; // sættes til true når Task er blevet initialiseret
 
 
         }
@@ -41,7 +41,7 @@ namespace RegionSyd13._1.Model
             get { return _patient; }
             set
             {
-                if (_isInitialized)
+                if (_isInitialized) // sikrer at Patient kun bliver opdateret når Task er blevet initialiseret
                 {
                     if (_patient == null)
                     {
