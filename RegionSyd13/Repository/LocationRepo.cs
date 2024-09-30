@@ -14,9 +14,17 @@ namespace RegionSyd13.Repository
             locations = new List<Location>(GetAll());
         }
         List<Location> locations;
-        public Location GetLocation(int id)
+        public List<Location> GetLocations(int id)
         {
-            return locations.FirstOrDefault(i => i.LocationID == id);
+            List<Location> taskLocations = new List<Location>();
+            foreach (var location in locations)
+            {
+                if (location.TaskID == id)
+                {
+                    taskLocations.Add(location);
+                }
+            }
+            return taskLocations; 
         }
         public void Add(Location entity)
         {
@@ -69,12 +77,15 @@ namespace RegionSyd13.Repository
                         locations.Add(new Location
                         {
                             LocationID = (int)reader["LocationID"],
+                            TaskID = (int)reader["TaskID"],
                             City = (string)reader["City"],
                             PostalCode = (string)reader["PostalCode"],
                             Street = (string)reader["Street"],
                             //HouseNumber = (string)reader["HouseNumber"],
                             date = DateOnly.FromDateTime(dateTime),
-                            time = TimeOnly.FromDateTime(dateTime)
+                            time = TimeOnly.FromDateTime(dateTime),
+                            Destination = (string)reader["Destination"],
+                            Arrival = Convert.ToBoolean(reader["Arrival"])
                         });
                     }
                 }

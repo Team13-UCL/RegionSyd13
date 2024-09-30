@@ -48,8 +48,8 @@
                 <DataGridTextColumn Header="afhentning" Binding="{Binding DateAndTimeForPickup, UpdateSourceTrigger=PropertyChanged}" />
                 <DataGridTextColumn Header="afsætning" Binding="{Binding DateAndTimeForDestination, UpdateSourceTrigger=PropertyChanged}" />
                 <DataGridTextColumn Header="Servicemål" Binding="{Binding ServiceGoal, UpdateSourceTrigger=PropertyChanged}" />
-                <DataGridTextColumn Header="Fra adresse" Binding="{Binding Destination, UpdateSourceTrigger=PropertyChanged}" />
-                <DataGridTextColumn Header="Til adresse" Binding="{Binding Destination, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Header="Fra adresse" Binding="{Binding Start.GetAdress, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Header="Til adresse" Binding="{Binding Stop.Destination, UpdateSourceTrigger=PropertyChanged}" />
             </DataGrid.Columns>
         </DataGrid>
 

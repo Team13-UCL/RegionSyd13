@@ -18,11 +18,20 @@ namespace RegionSyd13._1.Model
        // public string HouseNumber { get; set; }
         public DateOnly date { get; set; }
         public TimeOnly time { get; set; }
+        public bool Arrival { get; set; }
 
 
         public string GetAdress()
         {
             return $"{Street}, {PostalCode}, {City}";
+        }
+        public Location(bool arrival)
+        {
+            Arrival = arrival;
+        }
+        public Location()
+        {
+            
         }
     }
 }
