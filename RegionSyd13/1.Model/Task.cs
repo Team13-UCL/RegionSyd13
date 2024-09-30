@@ -17,12 +17,13 @@ namespace RegionSyd13._1.Model
         LocationRepo LocationRepo = new LocationRepo();
         private bool _isPatient = false; // brugt til at sikre at Patient kun bliver opdateret når Task er blevet initialiseret
         private bool _isLocation = false;
-        public Task(int taskID, int patientID, string regtaskID, string Type, string Description)
+        public Task(int taskID, int patientID, string regtaskID, string Type, string Description, string Goals)
         {
             TaskID = taskID;
             TaskType = Type;
             TaskDescription = Description;
             RegTaskID = regtaskID;
+            ServiceGoals = Goals;
             var patientRepo = PatientRepo ?? throw new ArgumentNullException(nameof(PatientRepo));
             Patient = patientRepo.GetById(patientID);
             _isPatient = true; // sættes til true når Task er blevet initialiseret

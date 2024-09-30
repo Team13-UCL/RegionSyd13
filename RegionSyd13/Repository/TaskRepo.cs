@@ -28,7 +28,8 @@ namespace RegionSyd13.Repository
                 command.Parameters.AddWithValue("@TaskID", entity.TaskID);
                 command.Parameters.AddWithValue("@RegTaskID", entity.RegTaskID);
                 command.Parameters.AddWithValue("@Type", entity.TaskType);
-                command.Parameters.AddWithValue("@Description", entity.TaskDescription);               
+                command.Parameters.AddWithValue("@Description", entity.TaskDescription);
+                command.Parameters.AddWithValue("@ServiceGoal", entity.ServiceGoals);
 
                 connection.Open();
                 command.ExecuteNonQuery();
@@ -70,8 +71,9 @@ namespace RegionSyd13.Repository
                             (int)reader["PatientID"],
                             (string)reader["RegTaskID"],
                             (string)reader["Type"],
-                            (string)reader["Description"]
-                            
+                            (string)reader["Description"],
+                            (string)reader["ServiceGoal"]
+
                         ));
                     }
                 }
@@ -101,7 +103,8 @@ namespace RegionSyd13.Repository
                             TaskID = (int)reader["TaskID"],
                             RegTaskID = (string)reader["RegTaskID"],
                             TaskType = (string)reader["Type"],
-                            TaskDescription = (string)reader["Description"]
+                            TaskDescription = (string)reader["Description"],
+                            ServiceGoals = (string)reader["ServiceGoal"]
 
                         };
                     }
@@ -124,7 +127,8 @@ namespace RegionSyd13.Repository
                 command.Parameters.AddWithValue("@TaskID", entity.TaskID);
                 command.Parameters.AddWithValue("@RegTaskID", entity.RegTaskID);
                 command.Parameters.AddWithValue("@Type", entity.TaskType);
-                command.Parameters.AddWithValue("@Description", entity.TaskDescription);            
+                command.Parameters.AddWithValue("@Description", entity.TaskDescription);
+                command.Parameters.AddWithValue("@ServiceGoal", entity.ServiceGoals);
 
                 connection.Open();
                 command.ExecuteNonQuery();

@@ -37,10 +37,9 @@ namespace RegionSyd13.Repository
                 command.Parameters.AddWithValue("@LocationID", entity.LocationID);
                 command.Parameters.AddWithValue("@City", entity.City);
                 command.Parameters.AddWithValue("@PostalCode", entity.PostalCode);
-                command.Parameters.AddWithValue("@Street", entity.Street);
-               // command.Parameters.AddWithValue("@HouseNumber", entity.HouseNumber);
-                command.Parameters.AddWithValue("@Date", entity.date);
-                command.Parameters.AddWithValue("@Time", entity.time);
+                command.Parameters.AddWithValue("@Street", entity.Street);                
+                command.Parameters.AddWithValue("@Date", entity.DateAndTime.Date);        
+                command.Parameters.AddWithValue("@Time", entity.DateAndTime.TimeOfDay);
                 connection.Open();
                 command.ExecuteNonQuery();
             }
@@ -73,7 +72,8 @@ namespace RegionSyd13.Repository
                 {
                     while (reader.Read())
                     {
-                        var dateTime = (DateTime)reader["Date"];
+                        var date = (DateTime)reader["Date"];  
+                        var time = (TimeSpan)reader["Time"];  
                         locations.Add(new Location
                         {
                             LocationID = (int)reader["LocationID"],
@@ -82,8 +82,7 @@ namespace RegionSyd13.Repository
                             PostalCode = (string)reader["PostalCode"],
                             Street = (string)reader["Street"],
                             //HouseNumber = (string)reader["HouseNumber"],
-                            date = DateOnly.FromDateTime(dateTime),
-                            time = TimeOnly.FromDateTime(dateTime),
+                            DateAndTime = date.Add(time),
                             Destination = (string)reader["Destination"],
                             Arrival = Convert.ToBoolean(reader["Arrival"])
                         });
@@ -109,6 +108,10 @@ namespace RegionSyd13.Repository
                 {
                     if (reader.Read())
                     {
+
+                        var date = (DateTime)reader["Date"];
+                        var time = (TimeSpan)reader["Time"];
+
                         location = new Location
                         {
                             LocationID = (int)reader["LocationID"],
@@ -116,8 +119,7 @@ namespace RegionSyd13.Repository
                             PostalCode = (string)reader["PostalCode"],
                             Street = (string)reader["Street"],
                             //HouseNumber = (string)reader["HouseNumber"],
-                            date = (DateOnly)reader["Date"],
-                            time = (TimeOnly)reader["Time"]
+                            DateAndTime = date.Add(time)
                         };
                     }
                 }
@@ -139,9 +141,8 @@ namespace RegionSyd13.Repository
                 command.Parameters.AddWithValue("@City", entity.City);
                 command.Parameters.AddWithValue("@PostalCode", entity.PostalCode);
                 command.Parameters.AddWithValue("@Street", entity.Street);
-                //command.Parameters.AddWithValue("@HouseNumber", entity.HouseNumber);
-                command.Parameters.AddWithValue("@Date", entity.date);
-                command.Parameters.AddWithValue("@Time", entity.time);
+                command.Parameters.AddWithValue("@Date", entity.DateAndTime.Date);
+                command.Parameters.AddWithValue("@Time", entity.DateAndTime.TimeOfDay);
                 connection.Open();
                 command.ExecuteNonQuery();
             }

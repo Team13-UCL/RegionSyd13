@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="TaskListView"
         Height="450"
-        Width="900"
+        Width="1100"
         WindowStartupLocation="CenterScreen">
 
    
@@ -41,15 +41,15 @@
         <!-- DataGrid replacing ListView -->
         <DataGrid Grid.Column="0" Grid.Row="1" Margin="10,10,5,0" CanUserAddRows="False" CanUserDeleteRows="False" AutoGenerateColumns="False" ItemsSource="{Binding _tasks}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Region ID" Binding="{Binding RegTaskID, UpdateSourceTrigger=PropertyChanged}" Width="4*" />
+                <DataGridTextColumn Header="Region ID" Binding="{Binding RegTaskID, UpdateSourceTrigger=PropertyChanged}" />
                 <DataGridTextColumn Header="Opgavetype" Binding="{Binding TaskType, UpdateSourceTrigger=PropertyChanged}" />
                 <DataGridTextColumn Header="Opgavebeskrivelse" Binding="{Binding TaskDescription, UpdateSourceTrigger=PropertyChanged}" />
                 <DataGridTextColumn Header="Patient noter/håndtering" Binding="{Binding Patient.HandlingNote, UpdateSourceTrigger=PropertyChanged}" />
-                <DataGridTextColumn Header="afhentning" Binding="{Binding DateAndTimeForPickup, UpdateSourceTrigger=PropertyChanged}" />
-                <DataGridTextColumn Header="afsætning" Binding="{Binding DateAndTimeForDestination, UpdateSourceTrigger=PropertyChanged}" />
-                <DataGridTextColumn Header="Servicemål" Binding="{Binding ServiceGoal, UpdateSourceTrigger=PropertyChanged}" />
-                <DataGridTextColumn Header="Fra adresse" Binding="{Binding Start.GetAdress, UpdateSourceTrigger=PropertyChanged}" />
-                <DataGridTextColumn Header="Til adresse" Binding="{Binding Stop.Destination, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Header="Tid for afhentning" Binding="{Binding LocationStart.DateAndTime, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Header="Tid til ankomst " Binding="{Binding LocationStop.DateAndTime, UpdateSourceTrigger=PropertyChanged}" />                
+                <DataGridTextColumn Header="Fra adresse" Binding="{Binding LocationStart.Destination, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Header="Til adresse" Binding="{Binding LocationStop.Destination, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Header="Servicemål" Binding="{Binding ServiceGoals, UpdateSourceTrigger=PropertyChanged}" />
             </DataGrid.Columns>
         </DataGrid>
 
