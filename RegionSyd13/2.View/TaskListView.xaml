@@ -39,17 +39,17 @@
        HorizontalAlignment="Left" VerticalAlignment="Top" />
 
         <!-- DataGrid replacing ListView -->
-        <DataGrid Grid.Column="0" Grid.Row="1" Margin="10,10,5,0" CanUserAddRows="False" CanUserDeleteRows="False" AutoGenerateColumns="False" ItemsSource="{Binding _tasks}">
+        <DataGrid Grid.Column="0" Grid.Row="1" Margin="10,10,5,0" CanUserAddRows="False" CanUserDeleteRows="False" AutoGenerateColumns="False" ItemsSource="{Binding _tasks}" SelectedItem="{Binding SelectedTask,  Mode=TwoWay}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Region ID" Binding="{Binding RegTaskID, UpdateSourceTrigger=PropertyChanged}" />
-                <DataGridTextColumn Header="Opgavetype" Binding="{Binding TaskType, UpdateSourceTrigger=PropertyChanged}" />
-                <DataGridTextColumn Header="Opgavebeskrivelse" Binding="{Binding TaskDescription, UpdateSourceTrigger=PropertyChanged}" />
-                <DataGridTextColumn Header="Patient noter/håndtering" Binding="{Binding Patient.HandlingNote, UpdateSourceTrigger=PropertyChanged}" />
-                <DataGridTextColumn Header="Tid for afhentning" Binding="{Binding LocationStart.DateAndTime, UpdateSourceTrigger=PropertyChanged}" />
-                <DataGridTextColumn Header="Tid til ankomst " Binding="{Binding LocationStop.DateAndTime, UpdateSourceTrigger=PropertyChanged}" />                
-                <DataGridTextColumn Header="Fra adresse" Binding="{Binding LocationStart.Destination, UpdateSourceTrigger=PropertyChanged}" />
-                <DataGridTextColumn Header="Til adresse" Binding="{Binding LocationStop.Destination, UpdateSourceTrigger=PropertyChanged}" />
-                <DataGridTextColumn Header="Servicemål" Binding="{Binding ServiceGoals, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Header="Region ID" Binding="{Binding RegTaskID, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Opgavetype" Binding="{Binding TaskType, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Opgavebeskrivelse" Binding="{Binding TaskDescription, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Patient noter/håndtering" Binding="{Binding Patient.HandlingNote, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Tid for afhentning" Binding="{Binding LocationStart.DateAndTime, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Tid til ankomst " Binding="{Binding LocationStop.DateAndTime, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Fra adresse" Binding="{Binding LocationStart.Destination, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Til adresse" Binding="{Binding LocationStop.Destination, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Servicemål" Binding="{Binding ServiceGoals, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" />
             </DataGrid.Columns>
         </DataGrid>
 
@@ -64,8 +64,8 @@
         <!-- Bottom buttons -->
         <StackPanel Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,10">
             <Button Content="Opret opgave" Background="LightGreen" Width="100" Margin="5" Click="AddTaskClick"/>
-            <Button Content="Rediger opgave" Background="Yellow" Width="100" Margin="5" Command="{Binding EditTaskCommand}" CommandParameter="{Binding SelectedTask}" Click="EditClick"/>
-            <Button Content="Slet opgave" Background="Red" Width="100" Margin="5" Command="{Binding DeleteTaskCommand}" CommandParameter="{Binding SelectedTask}"/>
+            <Button Content="Rediger opgave" Background="Yellow" Width="100" Margin="5" Click="EditClick"/>
+            <Button Content="Slet opgave" Background="Red" Width="100" Margin="5" Command="{Binding DeleteTaskCommand}" CommandParameter="{Binding SelectedTask, UpdateSourceTrigger=PropertyChanged}"/>
         </StackPanel>
         <StackPanel Grid.Column="1" Grid.Row="1"/>
     </Grid>

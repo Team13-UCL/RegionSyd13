@@ -134,6 +134,9 @@ namespace RegionSyd13._1.Model
         public int TaskID { get; set; }
         public int PatientID { get; set; }
 
+        public int LocationID { get; set; }
+        public int RegionID { get; set; }
+
         public string TaskType { get; set; }
 
         public string TaskDescription { get; set; }

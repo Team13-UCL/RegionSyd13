@@ -19,17 +19,18 @@ namespace RegionSyd13.Repository
         // Add a new Task
         public void Add(Task entity)
         {
-            string query = "INSERT INTO Task (TaskID, RegTaskID, Type, Description, ServiceGoal, PatientID, LocationID, RegionID) " +
-                           "VALUES (@TaskID, @RegTaskID, @Type, @Description, @ServiceGoal, @PatientID, @LocationID, @RegionID)";
+            string query = "INSERT INTO Task (RegTaskID, Type, Description, ServiceGoal) " +
+                           "VALUES (@RegTaskID, @Type, @Description, @ServiceGoal)";
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@TaskID", entity.TaskID);
+                SqlCommand command = new SqlCommand(query, connection);                
                 command.Parameters.AddWithValue("@RegTaskID", entity.RegTaskID);
                 command.Parameters.AddWithValue("@Type", entity.TaskType);
                 command.Parameters.AddWithValue("@Description", entity.TaskDescription);
                 command.Parameters.AddWithValue("@ServiceGoal", entity.ServiceGoals);
+                //skal addes patientnoter og locationstart og slut, de er bare ikke i task tabellen
+                
 
                 connection.Open();
                 command.ExecuteNonQuery();
@@ -68,7 +69,7 @@ namespace RegionSyd13.Repository
                         tasks.Add(new Task
                         (
                             (int)reader["TaskID"],
-                            (int)reader["PatientID"],
+                            reader["PatientID"] != DBNull.Value ? (int)reader["PatientID"] : 0,
                             (string)reader["RegTaskID"],
                             (string)reader["Type"],
                             (string)reader["Description"],
@@ -123,12 +124,12 @@ namespace RegionSyd13.Repository
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@TaskID", entity.TaskID);
+                SqlCommand command = new SqlCommand(query, connection);                
                 command.Parameters.AddWithValue("@RegTaskID", entity.RegTaskID);
                 command.Parameters.AddWithValue("@Type", entity.TaskType);
                 command.Parameters.AddWithValue("@Description", entity.TaskDescription);
                 command.Parameters.AddWithValue("@ServiceGoal", entity.ServiceGoals);
+                //skal addes patientnoter og locationstart og slut, de er bare ikke i task tabellen
 
                 connection.Open();
                 command.ExecuteNonQuery();

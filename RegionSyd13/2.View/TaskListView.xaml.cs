@@ -30,28 +30,33 @@ namespace RegionSyd13._2.View
             InitializeComponent();
             DataContext = vm;
         }
-
-        public TaskListView(TaskBankViewModel viewModel)
-        {
-            InitializeComponent();
-            DataContext = viewModel;
-        }
-        
+               
 
         private void AddTaskClick(object sender, RoutedEventArgs e)
         {
-            AddTaskView taskBankView = new AddTaskView();
-            taskBankView.Show();
+            AddTaskView addTaskView = new AddTaskView();
+            var addTaskViewModel = (AddTaskViewModel)addTaskView.DataContext;
+            addTaskView.Show();
             this.Close();
 
         }
 
         private void EditClick(object sender, RoutedEventArgs e)
         {
-            
-            AddTaskView taskBankView = new AddTaskView();
-            taskBankView.Show();
-            this.Close();
+
+            if (vm.SelectedTask != null)
+            {
+                var addTaskView = new AddTaskView();
+                var addTaskViewModel = (AddTaskViewModel)
+                addTaskView.DataContext;
+                addTaskViewModel.SelectedTask = vm.SelectedTask;
+                addTaskView.Show();
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Please select a task to edit.");
+            }
         }
 
     }

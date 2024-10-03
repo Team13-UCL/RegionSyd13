@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using RegionSyd13._3.ViewModel;
+using RegionSyd13.Repository;
 
 namespace RegionSyd13._2.View
 {
@@ -19,9 +21,21 @@ namespace RegionSyd13._2.View
     /// </summary>
     public partial class AddTaskView : Window
     {
+        AddTaskViewModel vm;
         public AddTaskView()
         {
+            
             InitializeComponent();
+            var taskRepo = new TaskRepo();
+            vm = new AddTaskViewModel(taskRepo);
+            DataContext = vm;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            TaskListView taskListView = new TaskListView();
+            taskListView.Show();
+            this.Close();
         }
     }
 }

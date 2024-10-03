@@ -29,7 +29,7 @@
 
         <!--alle textboxe har en textblock koblet på, så den viser en text indtil der bliver skrevet i den, nemmeste måde jeg lige ku se, der er nok en nemmere måde, men det her virker-->
         <!-- Region ID input -->
-        <TextBox x:Name="tbRegionalTaskID" Grid.Row="1" Margin="0,5" Text="{Binding RegionalTaskID, UpdateSourceTrigger=PropertyChanged}" Foreground="Gray"
+        <TextBox x:Name="tbRegionalTaskID" Grid.Row="1" Margin="0,5" Text="{Binding RegTaskID, UpdateSourceTrigger=PropertyChanged}" Foreground="Gray"
               />
         <TextBlock IsHitTestVisible="False" Text="Region ID" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="6,0,0,0" Foreground="DarkGray" Grid.Row="1">
             <TextBlock.Style>
@@ -75,7 +75,7 @@
         </TextBlock>
 
         <!-- Patient noter/håndtering input -->
-        <TextBox x:Name="tbPatientNotes" Grid.Row="4" Margin="0,5" Text="{Binding PatientNotes, UpdateSourceTrigger=PropertyChanged}" Foreground="Gray"/>
+        <TextBox x:Name="tbPatientNotes" Grid.Row="4" Margin="0,5" Text="{Binding Patient.HandlingNote, UpdateSourceTrigger=PropertyChanged}" Foreground="Gray"/>
         <TextBlock IsHitTestVisible="False" Text="Patient noter/håndtering" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="6,0,0,0" Foreground="DarkGray" Grid.Row="4">
             <TextBlock.Style>
                 <Style TargetType="{x:Type TextBlock}">
@@ -90,7 +90,7 @@
         </TextBlock>
 
         <!-- Dato og tid for afhentning input -->
-        <TextBox x:Name="tbDateAndTimeForPickup" Grid.Row="5" Margin="0,5" Text="{Binding DateAndTimeForPickup, UpdateSourceTrigger=PropertyChanged}" Foreground="Gray"/>
+        <TextBox x:Name="tbDateAndTimeForPickup" Grid.Row="5" Margin="0,5" Text="{Binding LocationStart.DateAndTime, UpdateSourceTrigger=PropertyChanged}" Foreground="Gray"/>
         <TextBlock IsHitTestVisible="False" Text="Dato og tid for afhentning" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="6,0,0,0" Foreground="DarkGray" Grid.Row="5">
             <TextBlock.Style>
                 <Style TargetType="{x:Type TextBlock}">
@@ -105,7 +105,7 @@
         </TextBlock>
 
         <!-- Dato og tid for afsætning input -->
-        <TextBox x:Name="DateAndTimeForDestination" Grid.Row="6" Margin="0,5" Text="{Binding DateAndTimeForDestination, UpdateSourceTrigger=PropertyChanged}" Foreground="Gray"/>
+        <TextBox x:Name="DateAndTimeForDestination" Grid.Row="6" Margin="0,5" Text="{Binding LocationStop.DateAndTime, UpdateSourceTrigger=PropertyChanged}" Foreground="Gray"/>
         <TextBlock IsHitTestVisible="False" Text="Dato og tid for afsætning" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="6,0,0,0" Foreground="DarkGray" Grid.Row="6">
             <TextBlock.Style>
                 <Style TargetType="{x:Type TextBlock}">
@@ -120,7 +120,7 @@
         </TextBlock>
 
         <!-- Servicemål input -->
-        <TextBox x:Name="tbServiceTarget" Grid.Row="7" Margin="0,5" Text="{Binding ServiceTarget, UpdateSourceTrigger=PropertyChanged}" Foreground="Gray"/>
+        <TextBox x:Name="tbServiceTarget" Grid.Row="7" Margin="0,5" Text="{Binding ServiceGoals, UpdateSourceTrigger=PropertyChanged}" Foreground="Gray"/>
         <TextBlock IsHitTestVisible="False" Text="Servicemål" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="6,0,0,0" Foreground="DarkGray" Grid.Row="7">
             <TextBlock.Style>
                 <Style TargetType="{x:Type TextBlock}">
@@ -135,7 +135,7 @@
         </TextBlock>
 
         <!-- Fra adresse input -->
-        <TextBox x:Name="tbStartLocation" Grid.Row="8" Margin="0,5" Text="{Binding StartLocation, UpdateSourceTrigger=PropertyChanged}" Foreground="Gray"/>
+        <TextBox x:Name="tbStartLocation" Grid.Row="8" Margin="0,5" Text="{Binding LocationStart.Destination, UpdateSourceTrigger=PropertyChanged}" Foreground="Gray"/>
         <TextBlock IsHitTestVisible="False" Text="Fra adresse" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="6,0,0,0" Foreground="DarkGray" Grid.Row="8">
             <TextBlock.Style>
                 <Style TargetType="{x:Type TextBlock}">
@@ -150,7 +150,7 @@
         </TextBlock>
 
         <!-- Til adresse input -->
-        <TextBox x:Name="tbDestination" Grid.Row="9" Margin="0,5" Text="{Binding Destination, UpdateSourceTrigger=PropertyChanged}" Foreground="Gray"/>
+        <TextBox x:Name="tbDestination" Grid.Row="9" Margin="0,5" Text="{Binding LocationStop.Destination, UpdateSourceTrigger=PropertyChanged}" Foreground="Gray"/>
         <TextBlock IsHitTestVisible="False" Text="Til adresse" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="6,0,0,0" Foreground="DarkGray" Grid.Row="9">
             <TextBlock.Style>
                 <Style TargetType="{x:Type TextBlock}">
@@ -166,6 +166,6 @@
 
         <!-- Opret opgave button -->
         <Button Grid.Row="10" Content="Opret opgave" Width="120" Height="30" Background="LightGreen" 
-            HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10" Command="{Binding AddTaskCommand}"/>
+            HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10" Command="{Binding AddOrEditTaskCommand}" Click="Button_Click"/>
     </Grid>
 </Window>
