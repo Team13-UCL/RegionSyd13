@@ -26,8 +26,13 @@ namespace RegionSyd13._2.View
         {
             
             InitializeComponent();
-            var taskRepo = new TaskRepo();
-            vm = new AddTaskViewModel(taskRepo);
+            vm = new AddTaskViewModel();
+            DataContext = vm;
+        }
+        public AddTaskView(object selectedTask)
+        {
+            InitializeComponent();
+            vm = new AddTaskViewModel(selectedTask);
             DataContext = vm;
         }
 

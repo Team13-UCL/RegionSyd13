@@ -5,167 +5,87 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RegionSyd13._2.View"
         mc:Ignorable="d"
-        Title="AddTaskView" Height="435" Width="300">
-    <Grid Margin="10">
+        Title="AddTaskView" Height="450" Width="800">
+    <Grid Margin="5">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <!-- For Logo -->
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <!-- For Button -->
+            <RowDefinition Height="75" />
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="75"/>
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <!-- Row = 0-->
+        <Image Source="/ambulancesyd.png" Width="125" Height="75" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="0" Grid.Column="0"/>
 
-        <Image Source="/ambulancesyd.png" Width="125" Height="75" 
-           HorizontalAlignment="Left" VerticalAlignment="Top" />
+        <Label Name="RegionIDlbl" Grid.Row="0" Grid.Column="2" VerticalAlignment="Top" Content="RegionID + Name"/>
+        <!-- Row = 1-10 | Column = 0 -->
+        <Label Name="Tasklbl" Content="Opgave" Grid.Row="1" Grid.Column="0"/>
+        <TextBox Name="RegionTaskIDtb" Text="{Binding RegTaskID, UpdateSourceTrigger=LostFocus}" Width="auto" Height="20" Grid.Row="2" Grid.Column="0"/>
+        <TextBox Name="TaskTypetb" Text="{Binding TaskType}" Width="auto" Height="20" Grid.Row="3" Grid.Column="0"/>
+        <TextBox Name="TaskDescriptiontb" Text="{Binding TaskDescription}" Width="auto" Height="20" Grid.Row="4" Grid.Column="0"/>
+        <TextBox Name="ServiceGoalstb" Text="{Binding ServiceGoal}" Width="auto" Height="20" Grid.Row="5" Grid.Column="0"/>
+        <Label Name="Patientlbl" Content="Patient Info" Grid.Row="6" Grid.Column="0"/>
+        <TextBox Name="FirstNametb" Text="FirstName" Width="auto" Height="20" Grid.Row="7" Grid.Column="0"/>
+        <TextBox Name="LastNametb" Text="Last Name" Width="auto" Height="20" Grid.Row="8" Grid.Column="0"/>
+        <TextBox Name="HandLingNotetb" Text="Handling Note" Width="auto" Height="20" Grid.Row="9" Grid.Column="0"/>
+        <TextBox Name="Typetb" Text="Type" Width="auto" Height="20" Grid.Row="10" Grid.Column="0"/>
 
+        <!-- Row = 1-10 | Column = 2-->
+        <Label Content="Start" Grid.Row="1" Grid.Column="2"/>
+        <TextBox Name="StartDestinationtb" Text="Destination" Width="auto" Height="20" Grid.Row="2" Grid.Column="2"/>
+        <Grid Grid.Row="2" Grid.Column="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <TextBox Name="StartCitytb" Text="City" Width="auto" Height="20"/>
+            <TextBox Name="StartPostalCodetb" Text="PostalCode" Width="auto" Height="20" Grid.Column="1"/>
+        </Grid>
+        <TextBox Name="StartStreettb" Text="Street" Width="auto" Height="20" Grid.Row="3" Grid.Column="2"/>
+        <Grid Grid.Row="4" Grid.Column="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <TextBox Name="StartDatetb" Text="Date" Width="auto" Height="20"/>
+            <TextBox Name="StartTimetb" Text="Time" Width="auto" Height="20" Grid.Column="1"/>
+        </Grid>
 
-        <!--alle textboxe har en textblock koblet på, så den viser en text indtil der bliver skrevet i den, nemmeste måde jeg lige ku se, der er nok en nemmere måde, men det her virker-->
-        <!-- Region ID input -->
-        <TextBox x:Name="tbRegionalTaskID" Grid.Row="1" Margin="0,5" Text="{Binding RegTaskID, UpdateSourceTrigger=PropertyChanged}" Foreground="Gray"
-              />
-        <TextBlock IsHitTestVisible="False" Text="Region ID" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="6,0,0,0" Foreground="DarkGray" Grid.Row="1">
-            <TextBlock.Style>
-                <Style TargetType="{x:Type TextBlock}">
-                    <Setter Property="Visibility" Value="Collapsed"/>
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding Text, ElementName=tbRegionalTaskID}" Value="">
-                            <Setter Property="Visibility" Value="Visible"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </TextBlock.Style>
-        </TextBlock>
-
-        <!-- Opgavetype input -->
-        <TextBox x:Name="tbTaskType" Grid.Row="2" Margin="0,5" Text="{Binding TaskType, UpdateSourceTrigger=PropertyChanged}" Foreground="Gray"/>
-        <TextBlock IsHitTestVisible="False" Text="Opgavetype" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="6,0,0,0" Foreground="DarkGray" Grid.Row="2">
-            <TextBlock.Style>
-                <Style TargetType="{x:Type TextBlock}">
-                    <Setter Property="Visibility" Value="Collapsed"/>
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding Text, ElementName=tbTaskType}" Value="">
-                            <Setter Property="Visibility" Value="Visible"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </TextBlock.Style>
-        </TextBlock>
-
-        <!-- Opgavebeskrivelse input -->
-        <TextBox x:Name="tbTaskDescription" Grid.Row="3" Margin="0,5" Text="{Binding TaskDescription, UpdateSourceTrigger=PropertyChanged}" Foreground="Gray"/>
-        <TextBlock IsHitTestVisible="False" Text="Opgavebeskrivelse" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="6,0,0,0" Foreground="DarkGray" Grid.Row="3">
-            <TextBlock.Style>
-                <Style TargetType="{x:Type TextBlock}">
-                    <Setter Property="Visibility" Value="Collapsed"/>
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding Text, ElementName=tbTaskDescription}" Value="">
-                            <Setter Property="Visibility" Value="Visible"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </TextBlock.Style>
-        </TextBlock>
-
-        <!-- Patient noter/håndtering input -->
-        <TextBox x:Name="tbPatientNotes" Grid.Row="4" Margin="0,5" Text="{Binding Patient.HandlingNote, UpdateSourceTrigger=PropertyChanged}" Foreground="Gray"/>
-        <TextBlock IsHitTestVisible="False" Text="Patient noter/håndtering" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="6,0,0,0" Foreground="DarkGray" Grid.Row="4">
-            <TextBlock.Style>
-                <Style TargetType="{x:Type TextBlock}">
-                    <Setter Property="Visibility" Value="Collapsed"/>
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding Text, ElementName=tbPatientNotes}" Value="">
-                            <Setter Property="Visibility" Value="Visible"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </TextBlock.Style>
-        </TextBlock>
-
-        <!-- Dato og tid for afhentning input -->
-        <TextBox x:Name="tbDateAndTimeForPickup" Grid.Row="5" Margin="0,5" Text="{Binding LocationStart.DateAndTime, UpdateSourceTrigger=PropertyChanged}" Foreground="Gray"/>
-        <TextBlock IsHitTestVisible="False" Text="Dato og tid for afhentning" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="6,0,0,0" Foreground="DarkGray" Grid.Row="5">
-            <TextBlock.Style>
-                <Style TargetType="{x:Type TextBlock}">
-                    <Setter Property="Visibility" Value="Collapsed"/>
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding Text, ElementName=tbDateAndTimeForPickup}" Value="">
-                            <Setter Property="Visibility" Value="Visible"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </TextBlock.Style>
-        </TextBlock>
-
-        <!-- Dato og tid for afsætning input -->
-        <TextBox x:Name="DateAndTimeForDestination" Grid.Row="6" Margin="0,5" Text="{Binding LocationStop.DateAndTime, UpdateSourceTrigger=PropertyChanged}" Foreground="Gray"/>
-        <TextBlock IsHitTestVisible="False" Text="Dato og tid for afsætning" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="6,0,0,0" Foreground="DarkGray" Grid.Row="6">
-            <TextBlock.Style>
-                <Style TargetType="{x:Type TextBlock}">
-                    <Setter Property="Visibility" Value="Collapsed"/>
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding Text, ElementName=DateAndTimeForDestination}" Value="">
-                            <Setter Property="Visibility" Value="Visible"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </TextBlock.Style>
-        </TextBlock>
-
-        <!-- Servicemål input -->
-        <TextBox x:Name="tbServiceTarget" Grid.Row="7" Margin="0,5" Text="{Binding ServiceGoals, UpdateSourceTrigger=PropertyChanged}" Foreground="Gray"/>
-        <TextBlock IsHitTestVisible="False" Text="Servicemål" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="6,0,0,0" Foreground="DarkGray" Grid.Row="7">
-            <TextBlock.Style>
-                <Style TargetType="{x:Type TextBlock}">
-                    <Setter Property="Visibility" Value="Collapsed"/>
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding Text, ElementName=tbServiceTarget}" Value="">
-                            <Setter Property="Visibility" Value="Visible"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </TextBlock.Style>
-        </TextBlock>
-
-        <!-- Fra adresse input -->
-        <TextBox x:Name="tbStartLocation" Grid.Row="8" Margin="0,5" Text="{Binding LocationStart.Destination, UpdateSourceTrigger=PropertyChanged}" Foreground="Gray"/>
-        <TextBlock IsHitTestVisible="False" Text="Fra adresse" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="6,0,0,0" Foreground="DarkGray" Grid.Row="8">
-            <TextBlock.Style>
-                <Style TargetType="{x:Type TextBlock}">
-                    <Setter Property="Visibility" Value="Collapsed"/>
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding Text, ElementName=tbStartLocation}" Value="">
-                            <Setter Property="Visibility" Value="Visible"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </TextBlock.Style>
-        </TextBlock>
-
-        <!-- Til adresse input -->
-        <TextBox x:Name="tbDestination" Grid.Row="9" Margin="0,5" Text="{Binding LocationStop.Destination, UpdateSourceTrigger=PropertyChanged}" Foreground="Gray"/>
-        <TextBlock IsHitTestVisible="False" Text="Til adresse" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="6,0,0,0" Foreground="DarkGray" Grid.Row="9">
-            <TextBlock.Style>
-                <Style TargetType="{x:Type TextBlock}">
-                    <Setter Property="Visibility" Value="Collapsed"/>
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding Text, ElementName=tbDestination}" Value="">
-                            <Setter Property="Visibility" Value="Visible"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </TextBlock.Style>
-        </TextBlock>
-
-        <!-- Opret opgave button -->
-        <Button Grid.Row="10" Content="Opret opgave" Width="120" Height="30" Background="LightGreen" 
-            HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10" Command="{Binding AddOrEditTaskCommand}" Click="Button_Click"/>
+        <Label Content="Slut" Grid.Row="6" Grid.Column="2"/>
+        <TextBox Name="EndDestinationtb" Text="Destination" Width="auto" Height="20" Grid.Row="7" Grid.Column="2"/>
+        <Grid Grid.Row="8" Grid.Column="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <TextBox Name="EndCitytb" Text="City" Width="auto" Height="20"/>
+            <TextBox Name="EndPostalCodetb" Text="PostalCode" Width="auto" Height="20" Grid.Column="1"/>
+        </Grid>
+        <TextBox Name="EndStreettb" Text="Street" Width="auto" Height="20" Grid.Row="9" Grid.Column="2"/>
+        <Grid Grid.Row="10" Grid.Column="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <TextBox Name="EndDatetb" Text="Date" Width="auto" Height="20"/>
+            <TextBox Name="EndTimetb" Text="Time" Width="auto" Height="20" Grid.Column="1"/>
+        </Grid>
+        <StackPanel Orientation="Horizontal" Grid.Row="11" Grid.Column="2" HorizontalAlignment="Right">
+            <Button Name="Addbtn" Content="Tilføj opgave" Width="75" Height="20" Margin="10,0"/>
+            <Button Name="Savebtn" Content="Gem" Width="75" Height="20" Margin="10,0"/>
+            <Button Name="Cancelbtn" Content="Cancel" Width="75" Height="20" Margin="10,0" IsCancel="True"/>
+        </StackPanel>
     </Grid>
 </Window>

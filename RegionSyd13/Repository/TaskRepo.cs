@@ -17,7 +17,7 @@ namespace RegionSyd13.Repository
         }
 
         // Add a new Task
-        public void Add(Task entity)
+        public Task Add(Task entity)
         {
             string query = "INSERT INTO Task (RegTaskID, Type, Description, ServiceGoal) " +
                            "VALUES (@RegTaskID, @Type, @Description, @ServiceGoal)";
@@ -32,6 +32,18 @@ namespace RegionSyd13.Repository
                 //skal addes patientnoter og locationstart og slut, de er bare ikke i task tabellen
                 
 
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+            return null;
+        }
+
+        public void AddSpecific(string columns, string values)
+        {
+            string query = $"INSERT INTO Task ({columns}) VALUES ({values})";
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                SqlCommand command = new SqlCommand(query, connection);
                 connection.Open();
                 command.ExecuteNonQuery();
             }
@@ -130,6 +142,19 @@ namespace RegionSyd13.Repository
                 command.Parameters.AddWithValue("@Description", entity.TaskDescription);
                 command.Parameters.AddWithValue("@ServiceGoal", entity.ServiceGoals);
                 //skal addes patientnoter og locationstart og slut, de er bare ikke i task tabellen
+
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+        }
+
+        public void UpdateSpecific(string column, string value, int ID)
+        {
+            string query = $"UPDATE Task SET {column} = {value} WHERE TaskID = {ID}";
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                SqlCommand command = new SqlCommand(query, connection);
+               
 
                 connection.Open();
                 command.ExecuteNonQuery();

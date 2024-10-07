@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Windows.Controls.Primitives;
 using RegionSyd13._1.Model;
 
 namespace RegionSyd13.Repository
@@ -16,11 +17,10 @@ namespace RegionSyd13.Repository
         }
 
         // Add a new Patient
-        public void Add(Patient entity)
+        public Patient Add(Patient entity)
         {
             string query = "INSERT INTO Patient (FirstName, LastName, Type, HandlingNote) " +
                            "VALUES (@FirstName, @LastName, @Type, @HandlingNote)";
-
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 SqlCommand command = new SqlCommand(query, connection);
@@ -33,6 +33,34 @@ namespace RegionSyd13.Repository
                 connection.Open();
                 command.ExecuteNonQuery();
             }
+            query = "SELECT * FROM Patient ORDER BY ID DESC LIMIT 1";
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                SqlCommand command = new SqlCommand(query, connection);
+                connection.Open();
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        entity = new Patient
+                        {
+                            PatientID = (int)reader["PatientID"],
+                            FirstName = (string)reader["FirstName"],
+                            LastName = (string)reader["LastName"],
+                            Type = (string)reader["Type"],
+                            HandlingNote = (string)reader["HandlingNote"]
+
+                        };
+                    }
+                }
+            }
+            return entity;
+        }
+
+        public void AddSpecific(string columns, string values)
+        {
+            throw new NotImplementedException();
         }
 
         // Delete Patient by ID
@@ -129,5 +157,18 @@ namespace RegionSyd13.Repository
                 command.ExecuteNonQuery();
             }
         }
+
+        public void UpdateSpecific(string column, string value, int ID) //Husk at sætte ' ' ved værdien, hvis det er en string
+        {
+            string query = $"UPDATE Patient SET {column} = {value} WHERE PatientID = {ID}";
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                SqlCommand command = new SqlCommand(query, connection);
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+        }
+
+        
     }
 }

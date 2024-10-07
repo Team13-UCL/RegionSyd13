@@ -26,7 +26,7 @@ namespace RegionSyd13.Repository
             }
             return taskLocations; 
         }
-        public void Add(Location entity)
+        public Location Add(Location entity)
         {
             string query = "INSERT INTO Location (LocationID, City, PostalCode, Street, Date, Time) " +
                            "VALUES (@LocationID, @City, @PostalCode, @Street, @Date, @Time)";
@@ -43,6 +43,34 @@ namespace RegionSyd13.Repository
                 connection.Open();
                 command.ExecuteNonQuery();
             }
+            query = "SELECT * FROM Patient ORDER BY ID DESC LIMIT 1";
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                SqlCommand command = new SqlCommand(query, connection);
+                connection.Open();
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+
+                        var date = (DateTime)reader["Date"];
+                        var time = (TimeSpan)reader["Time"];
+
+                        entity = new Location
+                        {
+                            LocationID = (int)reader["LocationID"],
+                            City = (string)reader["City"],
+                            PostalCode = (string)reader["PostalCode"],
+                            Street = (string)reader["Street"],
+                            //HouseNumber = (string)reader["HouseNumber"],
+                            DateAndTime = date.Add(time)
+                        };
+                    }
+                }
+            }
+
+            return entity;
         }
 
         public void Delete(int id)
@@ -146,6 +174,16 @@ namespace RegionSyd13.Repository
                 connection.Open();
                 command.ExecuteNonQuery();
             }
+        }
+
+        public void UpdateSpecific(string column, string value, int ID)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddSpecific(string columns, string values)
+        {
+            throw new NotImplementedException();
         }
     }
 }

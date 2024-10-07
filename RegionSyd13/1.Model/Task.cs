@@ -6,12 +6,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Documents;
 using Microsoft.VisualBasic;
+using RegionSyd13.MVVM;
 using RegionSyd13.Repository;
 
 namespace RegionSyd13._1.Model
 {
-    public class Task
+    public class Task : ViewModelBase
     {
+        private readonly IRepo<Task> _repo;
         PatientRepo PatientRepo = new PatientRepo();
         private readonly IRepo<Patient> _patientRepo;
         LocationRepo LocationRepo = new LocationRepo();
@@ -30,8 +32,17 @@ namespace RegionSyd13._1.Model
             var _locationRepo = LocationRepo ?? throw new ArgumentNullException(nameof(LocationRepo));
             AddLocations();
             _isLocation = true;
-            
 
+            var TaskRepo = new TaskRepo();
+            _repo = TaskRepo;
+
+        }
+        public Task(int patientID)
+        {
+            PatientID = patientID;
+        }
+        public Task()
+        {
 
         }
         public void AddLocations()
@@ -46,10 +57,7 @@ namespace RegionSyd13._1.Model
                 
             });
         }
-        public Task()
-        {
-            
-        }
+        
         private Location _locationStart;
         public Location LocationStart 
         {  get 
@@ -130,18 +138,69 @@ namespace RegionSyd13._1.Model
                 }
             }
         }
-        public string RegTaskID {  get; set; }
+        private string _regTaskID;
+        public string RegTaskID
+        {
+            get => _regTaskID;
+            set
+            {
+                if(_isLocation == true) _repo.UpdateSpecific("RegTaskID", "'" + value + "'", TaskID); 
+                _regTaskID = value;
+            }
+        }
+        private int _patientID;
+
+        public int PatientID
+        {
+            get { return _patientID; }
+            set 
+            {
+                if (_isLocation == true) _repo.UpdateSpecific("PatientID", "'" + value + "'", TaskID);
+                _patientID = value;
+            }
+        }
+
         public int TaskID { get; set; }
-        public int PatientID { get; set; }
-
-        public int LocationID { get; set; }
-        public int RegionID { get; set; }
-
-        public string TaskType { get; set; }
-
-        public string TaskDescription { get; set; }
-
-        public string ServiceGoals { get; set; }
+        private int _regionID;
+        public int RegionID 
+        {
+            get { return _regionID; }
+            set 
+            {
+                if (_isLocation == true) _repo.UpdateSpecific("RegionID", "'" + value + "'", TaskID);
+                _regionID = value;
+            }
+        }
+        private string _taskType;
+        public string TaskType 
+        {
+            get => _taskType;
+            set
+            {
+                _taskType = value;
+                OnPropertyChanged();
+            }
+        }
+        private string _taskDescription;
+        public string TaskDescription 
+        { 
+            get { return _taskDescription; }
+            set 
+            {
+                if (_isLocation == true) { _repo.UpdateSpecific("Description", "'" + value + "'", TaskID); } 
+                _taskDescription = value;
+            }
+        }
+        private string _serviceGoals;
+        public string ServiceGoals 
+        {
+            get { return _serviceGoals; }
+            set 
+            {
+                if (_isLocation == true) { _repo.UpdateSpecific("Type", "'" + value + "'", TaskID); } 
+                _serviceGoals = value;
+            }
+        }
 
     }
 }

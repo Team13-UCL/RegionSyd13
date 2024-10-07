@@ -16,22 +16,28 @@ namespace RegionSyd13.Repository
         {
             _connectionString = Connection.ConnectionString;
         }
-        public void Add(Region entity)
+        public Region Add(Region entity)
+        {
+            string query = "INSERT INTO Region (RegionID, Name)\n" +
+                "VALUES (@RegionID, @Name)";
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                string query = "INSERT INTO Region (RegionID, Name)\n" +
-                    "VALUES (@RegionID, @Name)";
-
-                using (SqlConnection connection = new SqlConnection(_connectionString))
-                {
-                    SqlCommand command = new SqlCommand(query, connection);
-                    command.Parameters.AddWithValue("@Firstname", entity.RegID);
-                    command.Parameters.AddWithValue("@LastName", entity.RegName);
-                    connection.Open();
-                    command.ExecuteNonQuery();
-                }
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Firstname", entity.RegID);
+                command.Parameters.AddWithValue("@LastName", entity.RegName);
+                connection.Open();
+                command.ExecuteNonQuery();
             }
+            return null;
+        }
 
-            public void Delete(int id)
+        public void AddSpecific(string columns, string values)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(int id)
             {
             string query = "DELETE FROM PRODUCT WHERE RegionID = @RegionID";
 
@@ -113,6 +119,11 @@ namespace RegionSyd13.Repository
                 command.ExecuteNonQuery();
             }
         }
+
+        public void UpdateSpecific(string column, string value, int ID)
+        {
+            throw new NotImplementedException();
         }
+    }
     
 }

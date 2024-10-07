@@ -21,157 +21,164 @@ namespace RegionSyd13._3.ViewModel
 
     public class AddTaskViewModel : CurrentUser
     {
-        public ICommand AddOrEditTaskCommand { get; private set; }   
-        
-
-        private readonly IRepo<Task> repository;
-        public ObservableCollection<Task> _tasks { get; set; }
-
-        private Task selectedTask;
-        public Task SelectedTask
+        private TaskRepo tRepo;
+        private readonly IRepo<Task> _taskRepo;
+        private PatientRepo pRepo;
+        private readonly IRepo<Patient> _patientRepo;
+        private LocationRepo lRepo;
+        private readonly IRepo<Location> _locationRepo;
+        //public ObservableCollection<Task> _tasks { get; set; }
+        public AddTaskViewModel(object task)
         {
-            get => selectedTask;
-            set
-            {
-               
-                    selectedTask = value;
-                    
-                if (selectedTask != null)
-                {
-                    // fyld felterne ud med de valgte tasks værdier
-                    TaskType = selectedTask.TaskType;
-                    TaskDescription = selectedTask.TaskDescription;
-                    RegTaskID = selectedTask.RegTaskID;
-                    ServiceGoals = selectedTask.ServiceGoals;
-                    LocationStart = selectedTask.LocationStart;
-                    LocationStop = selectedTask.LocationStop;
-                }
-                OnPropertyChanged();
+            _taskRepo = (tRepo = new TaskRepo());
+            _patientRepo = (pRepo = new PatientRepo());
+            _locationRepo = (lRepo = new LocationRepo());
+            Task SelectedTask = (Task)task;
+            _taskID = SelectedTask.TaskID;
+            RegTaskID = SelectedTask.RegTaskID;
+            TaskType = SelectedTask.TaskType;
+            TaskDescription = SelectedTask.TaskDescription;
+            ServiceGoal = SelectedTask.ServiceGoals;
+            //Getpatient((Task)SelectedTask);
+        }
+        public AddTaskViewModel()
+        {
+            _taskRepo = (tRepo = new TaskRepo());
+            _patientRepo = (pRepo = new PatientRepo());
+            _locationRepo = (lRepo = new LocationRepo());
+        }
+        //private Patient Getpatient(Task task)
+        //{
+        //    Patient patient = null;
+        //    if(task.PatientID != null) patient = _patientRepo.GetById(task.PatientID);
+        //    else 
+        //    { 
+        //        patient = _patientRepo.Add(new Patient());
+        //    }
+        //    return patient;
+        //}
+        //private void GetLocations()
+        //{
+        //    List<Location> locations = new List<Location>(_locationRepo.GetAll());
+        //    foreach (Location location in locations) 
+        //    {
+        //        if(location.TaskID == SelectedTask.TaskID)
+        //        {
+        //            if(StartLocation == null && location.Arrival == false) StartLocation = location;
+        //            else if(EndLocation == null && location.Arrival == true) EndLocation = location;
+        //        }
+        //    }
+        //    if (StartLocation == null) StartLocation = _locationRepo.Add(new Location(false));
+        //    if(EndLocation == null) EndLocation = _locationRepo.Add(new Location(true));
+        //}
 
-
+        // Local properties for the task
+        private int _taskID 
+        { 
+            set 
+            { 
+                _taskID = value;
+                CanUpdate(); 
+            }  
+            get 
+            { 
+                return _taskID;
             }
         }
-
-
-        public AddTaskViewModel(IRepo<Task> repository)
-        {
-            
-            this.repository = repository ?? throw new ArgumentNullException(nameof(repository));
-            _tasks = new ObservableCollection<Task>(repository.GetAll());
-
-            AddOrEditTaskCommand = new RelayCommand(AddOrEditTask);
-            
-            
-
-        }
-
-
-
-        public void AddOrEditTask(object obj)
-        {
-            if (SelectedTask == null) //hvis der ikke er valgt en task, så er det en ny task
-            {
-                
-                Task newTask = new Task
-                {
-                    TaskType = this.TaskType,
-                    TaskDescription = this.TaskDescription,
-                    RegTaskID = this.RegTaskID,
-                    ServiceGoals = this.ServiceGoals,
-                    LocationStart = this.LocationStart,
-                    LocationStop = this.LocationStop,
-                    //mangler flere dataer fra patient og location
-                };
-
-                repository.Add(newTask);
-                _tasks.Add(newTask);
-            }
-            else //hvis der er valgt en task, så er det en eksisterende task der skal opdateres
-            {
-                
-                SelectedTask.TaskType = this.TaskType;
-                SelectedTask.TaskDescription = this.TaskDescription;
-                SelectedTask.RegTaskID = this.RegTaskID;
-                SelectedTask.ServiceGoals = this.ServiceGoals;
-                SelectedTask.LocationStart = this.LocationStart;
-                SelectedTask.LocationStop = this.LocationStop;
-                //mangler flere dataer fra patient og location
-
-                repository.Update(SelectedTask);
-            }
-
-            OnPropertyChanged(nameof(_tasks));
-        }
-
-
-
-        
-
-
-        private string _taskType;
-        private string _taskDescription;
         private string _regTaskID;
-        private string _serviceGoals;
-        private int _patientID;
-        private Location _locationStart;
-        private Location _locationStop;
-        private Patient _patient;
-        private int _regionID;
-
-        
-        public string TaskType
-        {
-            get => _taskType;
-            set { _taskType = value; OnPropertyChanged(); }
-        }
-
-        public string TaskDescription
-        {
-            get => _taskDescription;
-            set { _taskDescription = value; OnPropertyChanged(); }
-        }
 
         public string RegTaskID
         {
-            get => _regTaskID;
-            set { _regTaskID = value; OnPropertyChanged(); }
+            get { return _regTaskID; }
+            set 
+            { 
+                _regTaskID = value; 
+                OnPropertyChanged();
+            }
         }
+        private string _taskType;
 
-        public string ServiceGoals
+        public string TaskType
         {
-            get => _serviceGoals;
-            set { _serviceGoals = value; OnPropertyChanged(); }
+            get { return _taskType; }
+            set 
+            { 
+                _taskType = value;
+                OnPropertyChanged();
+            }
         }
+        private string _taskDescription;
 
-        public int PatientID
+        public string TaskDescription
         {
-            get => _patientID;
-            set { _patientID = value; OnPropertyChanged(); }
+            get { return _taskDescription; }
+            set 
+            { 
+                _taskDescription = value; 
+                OnPropertyChanged();
+            }
         }
+        private string _serviceGoal;
 
-        public Location LocationStart
+        public string ServiceGoal
         {
-            get => _locationStart;
-            set { _locationStart = value; OnPropertyChanged(); }
-        }
+            get 
+            {
+                if (_serviceGoal != null)
+                    return _serviceGoal;
+                else return "ServiceGoal";
 
-        public Location LocationStop
-        {
-            get => _locationStop;
-            set { _locationStop = value; OnPropertyChanged(); }
+            }
+            set 
+            { 
+                _serviceGoal = value;
+                OnPropertyChanged();
+            }
         }
+        int _patientID;
+        int _startID;
+        int _endID;
 
-        public int RegionID
+        bool _canUpdate = false;
+        private bool CanUpdate() // Placeres ved hver af de private PK'er.
         {
-            get => _regionID;
-            set { _regionID = value; OnPropertyChanged(); }
+            if (_taskID != 0 && _patientID != 0 && _startID != 0 && _endID != 0)
+            {
+                return true;
+            }
+            else return false;
         }
+        public Task SaveTask()
+        {
+            Task task = new Task()
+            {
+                TaskID = _taskID,
+                RegTaskID = this.RegTaskID,
+                TaskType = this.TaskType,
+                TaskDescription = this.TaskDescription,
+                ServiceGoals = this.ServiceGoal,
+                PatientID = _patientID,
+                RegionID = User.RegionID
 
-        public Patient Patient
-        {
-            get => _patient;
-            set { _patient = value; OnPropertyChanged(); }
+            };
+            return task;
         }
+        public Patient SavePatient() { return null; }
+        public void UpdateTask() 
+        {
+            //Rækkefølge for opdatering: Patient, Task, Lokationer.
+            _taskRepo.Update(SaveTask());
+        }
+        public void AddTask()
+        {
+            Patient patient = _patientRepo.Add(SavePatient());
+            Task task = new Task(patient.PatientID);
+            task = _taskRepo.Add(SaveTask()); 
+            // Tilføjet til Add() metoden i et par af repoerne, at en tilføjer objektet i databasen, 
+            // og så returnerer det nye objekt, så man kan få objektets ID, til at kunne tilføje som FK i de andre.
+        }
+        public RelayCommand Update => new RelayCommand(Execute => UpdateTask(), CanExecute => _canUpdate != false);
+
 
     }
 

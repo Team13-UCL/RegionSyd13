@@ -13,7 +13,7 @@ namespace RegionSyd13.Repository
         {
             _connectionString = Connection.ConnectionString;
         }
-        public void Add(User entity)
+        public User Add(User entity)
         {
             string query = "INSERT INTO User (UserID, Username, Password) " +
                            "VALUES (@UserID, @Username, @Password)";
@@ -27,6 +27,12 @@ namespace RegionSyd13.Repository
                 connection.Open();
                 command.ExecuteNonQuery();
             }
+            return null;
+        }
+
+        public void AddSpecific(string columns, string values)
+        {
+            throw new NotImplementedException();
         }
 
         public void Delete(int id)
@@ -113,6 +119,11 @@ namespace RegionSyd13.Repository
                 connection.Open();
                 command.ExecuteNonQuery();
             }
+        }
+
+        public void UpdateSpecific(string column, string value, int ID)
+        {
+            throw new NotImplementedException();
         }
     }
 }

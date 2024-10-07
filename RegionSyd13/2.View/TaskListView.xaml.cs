@@ -46,10 +46,9 @@ namespace RegionSyd13._2.View
 
             if (vm.SelectedTask != null)
             {
-                var addTaskView = new AddTaskView();
+                var addTaskView = new AddTaskView(vm.SelectedTask);
                 var addTaskViewModel = (AddTaskViewModel)
                 addTaskView.DataContext;
-                addTaskViewModel.SelectedTask = vm.SelectedTask;
                 addTaskView.Show();
                 this.Close();
             }

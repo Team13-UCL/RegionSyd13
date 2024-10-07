@@ -12,8 +12,10 @@ namespace RegionSyd13.Repository
     {
         IEnumerable<T> GetAll();
         T GetById(int id);
-        void Add(T entity);
+        T Add(T entity);
         void Update(T entity);
         void Delete(int id);
+        void UpdateSpecific(string column, string value, int ID);
+        void AddSpecific(string columns, string values);
     }
 }
