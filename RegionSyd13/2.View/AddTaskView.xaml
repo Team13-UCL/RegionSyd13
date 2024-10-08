@@ -44,61 +44,213 @@
                Content="RegionID + Name" />
         <!-- Row = 1-10 | Column = 0 -->
 
-        <Label Name="Tasklbl" Content="Opgave" Grid.Row="1" Grid.Column="0"/>
-        <TextBox Name="RegionTaskIDtb" Text="{Binding RegTaskID}" Width="auto" Height="20" Grid.Row="2" Grid.Column="0"/>
-        <TextBox Name="TaskTypetb" Text="{Binding TaskType}" Width="auto" Height="20" Grid.Row="3" Grid.Column="0"/>
-        <TextBox Name="TaskDescriptiontb" Text="{Binding TaskDescription}" Width="auto" Height="20" Grid.Row="4" Grid.Column="0"/>
-        <TextBox Name="ServiceGoalstb" Text="{Binding ServiceGoal}" Width="auto" Height="20" Grid.Row="5" Grid.Column="0"/>
-        <Label Name="Patientlbl" Content="Patient Info" Grid.Row="6" Grid.Column="0"/>
-        <TextBox Name="FirstNametb" Text="{Binding FirstName}" Width="auto" Height="20" Grid.Row="7" Grid.Column="0"/>
-        <TextBox Name="LastNametb" Text="{Binding LastName}" Width="auto" Height="20" Grid.Row="8" Grid.Column="0"/>
-        <TextBox Name="HandLingNotetb" Text="{Binding HandlingNote}" Width="auto" Height="20" Grid.Row="9" Grid.Column="0"/>
-        <TextBox Name="Typetb" Text="{Binding PatientType}" Width="auto" Height="20" Grid.Row="10" Grid.Column="0"/>
+        <Label Name="Tasklbl"
+               Content="Opgave"
+               Grid.Row="1"
+               Grid.Column="0" />
+        <TextBox Name="RegionTaskIDtb"
+                 Tag="RegTaskID"
+                 Text="{Binding RegTaskID}"
+                 Width="auto"
+                 Height="20"
+                 Grid.Row="2"
+                 Grid.Column="0"
+                 GotFocus="TextBox_GotFocus"/>
+        <TextBox Name="TaskTypetb"
+                 Tag="TaskType"
+                 Text="{Binding TaskType}"
+                 Width="auto"
+                 Height="20"
+                 Grid.Row="3"
+                 Grid.Column="0" />
+        <TextBox Name="TaskDescriptiontb"
+                 Tag="TaskDescription"
+                 Text="{Binding TaskDescription}"
+                 Width="auto"
+                 Height="20"
+                 Grid.Row="4"
+                 Grid.Column="0"
+                 GotFocus="TextBox_GotFocus" />
+        <TextBox Name="ServiceGoalstb"
+                 Tag="ServiceGoal"
+                 Text="{Binding ServiceGoal}"
+                 Width="auto"
+                 Height="20"
+                 Grid.Row="5"
+                 Grid.Column="0"
+                 GotFocus="TextBox_GotFocus" />
+        <Label Name="Patientlbl"
+               Content="Patient Info"
+               Grid.Row="6"
+               Grid.Column="0" />
+        <TextBox Name="FirstNametb"
+                 Tag="FirstName"
+                 Text="{Binding FirstName}"
+                 Width="auto"
+                 Height="20"
+                 Grid.Row="7"
+                 Grid.Column="0"
+                 GotFocus="TextBox_GotFocus" />
+        <TextBox Name="LastNametb"
+                 Tag="LastName"
+                 Text="{Binding LastName}"
+                 Width="auto"
+                 Height="20"
+                 Grid.Row="8"
+                 Grid.Column="0"
+                 GotFocus="TextBox_GotFocus" />
+        <TextBox Name="HandLingNotetb"
+                 Tag="HandlingNote"
+                 Text="{Binding HandlingNote}"
+                 Width="auto"
+                 Height="20"
+                 Grid.Row="9"
+                 Grid.Column="0"
+                 GotFocus="TextBox_GotFocus" />
+        <TextBox Name="Typetb"
+                 Tag="PatientType"
+                 Text="{Binding PatientType}"
+                 Width="auto"
+                 Height="20"
+                 Grid.Row="10"
+                 Grid.Column="0"
+                 GotFocus="TextBox_GotFocus" />
 
         <!-- Row = 1-10 | Column = 2-->
-        <Label Content="Start" Grid.Row="1" Grid.Column="2"/>
-        <TextBox Name="StartDestinationtb" Text="{Binding StartDestination}" Width="auto" Height="20" Grid.Row="2" Grid.Column="2"/>
-        <Grid Grid.Row="3" Grid.Column="2">
-
-        
-
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="1*" />
-            </Grid.ColumnDefinitions>
-
-            <TextBox Name="StartCitytb" Text="{Binding StartCity}" Width="auto" Height="20"/>
-            <TextBox Name="StartPostalCodetb" Text="{Binding StartPostalCode}" Width="auto" Height="20" Grid.Column="2"/>
-
-            
-
-        </Grid>
-        <TextBox Name="StartStreettb" Text="{Binding StartStreet}" Width="auto" Height="20" Grid.Row="4" Grid.Column="2"/>
-        <TextBox Name="StartDateAndTimetb" Text="{Binding StartDateAndTime}" Width="auto" Height="20"  Grid.Row="5" Grid.Column="2"/>
+        <Label Content="Start"
+               Grid.Row="1"
+               Grid.Column="2" />
+        <TextBox Name="StartDestinationtb"
+                 Tag="StartDestination"
+                 Text="{Binding StartDestination}"
+                 Width="auto"
+                 Height="20"
+                 Grid.Row="2"
+                 Grid.Column="2"
+                 GotFocus="TextBox_GotFocus" />
+        <Grid Grid.Row="3"
+              Grid.Column="2">
 
 
-        <Label Content="Slut" Grid.Row="6" Grid.Column="2"/>
-        <TextBox Name="EndDestinationtb" Text="{Binding EndDestination}" Width="auto" Height="20" Grid.Row="7" Grid.Column="2"/>
-        <Grid Grid.Row="8" Grid.Column="2">
-
-        
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*" />
                 <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
 
-            <TextBox Name="EndCitytb" Text="{Binding EndCity}" Width="auto" Height="20"/>
-            <TextBox Name="EndPostalCodetb" Text="{Binding EndPostalCode}" Width="auto" Height="20" Grid.Column="1"/>
-        </Grid>
-        <TextBox Name="EndStreettb" Text="{Binding EndStreet}" Width="auto" Height="20" Grid.Row="9" Grid.Column="2"/>
-        <TextBox Name="EndDateAndTimetb" Text="{Binding EndDateAndTime}" Width="auto" Height="20" Grid.Row="10" Grid.Column="2"/>
-        <StackPanel Orientation="Horizontal" Grid.Row="11" Grid.Column="2" HorizontalAlignment="Right">
-            <Button Name="Addbtn" Command="{Binding AddCommand}" Content="Opret opgave" Width="75" Height="20" Margin="10,0" Click="Addbtn_Click"/>
-            <Button Name="Savebtn" Command="{Binding UpdateCommand}" Content="Gem" Width="75" Height="20" Margin="10,0" Click="Savebtn_Click"/>
-            <Button Name="Cancelbtn" Content="Cancel" Width="75" Height="20" Margin="10,0" IsCancel="True" Click="Cancelbtn_Click"/>
+            <TextBox Name="StartCitytb"
+                     Tag="StartCity"
+                     Text="{Binding StartCity}"
+                     Width="auto"
+                     Height="20"
+                     GotFocus="TextBox_GotFocus" />
+            <TextBox Name="StartPostalCodetb"
+                     Tag="StartPostalCode"
+                     Text="{Binding StartPostalCode}"
+                     Width="auto"
+                     Height="20"
+                     Grid.Column="2"
+                     GotFocus="TextBox_GotFocus" />
 
-           
+
+
+        </Grid>
+        <TextBox Name="StartStreettb"
+                 Tag="StartStreet"
+                 Text="{Binding StartStreet}"
+                 Width="auto"
+                 Height="20"
+                 Grid.Row="4"
+                 Grid.Column="2"
+                 GotFocus="TextBox_GotFocus" />
+        <TextBox Name="StartDateAndTimetb"
+                 Tag="StartDataAndTime"
+                 Text="{Binding StartDateAndTime}"
+                 Width="auto"
+                 Height="20"
+                 Grid.Row="5"
+                 Grid.Column="2"
+                 GotFocus="TextBox_GotFocus" />
+
+
+        <Label Content="Slut"
+               Grid.Row="6"
+               Grid.Column="2" />
+        <TextBox Name="EndDestinationtb"
+                 Tag="EndDestination"
+                 Text="{Binding EndDestination}"
+                 Width="auto"
+                 Height="20"
+                 Grid.Row="7"
+                 Grid.Column="2"
+                 GotFocus="TextBox_GotFocus" />
+        <Grid Grid.Row="8"
+              Grid.Column="2">
+
+
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+
+            <TextBox Name="EndCitytb"
+                     Tag="EndCity"
+                     Text="{Binding EndCity}"
+                     Width="auto"
+                     Height="20"
+                     GotFocus="TextBox_GotFocus" />
+            <TextBox Name="EndPostalCodetb"
+                     Tag="EndPostalCode"
+                     Text="{Binding EndPostalCode}"
+                     Width="auto"
+                     Height="20"
+                     Grid.Column="1"
+                     GotFocus="TextBox_GotFocus" />
+        </Grid>
+        <TextBox Name="EndStreettb"
+                 Tag="EndStreet"
+                 Text="{Binding EndStreet}"
+                 Width="auto"
+                 Height="20"
+                 Grid.Row="9"
+                 Grid.Column="2"
+                 GotFocus="TextBox_GotFocus" />
+        <TextBox Name="EndDateAndTimetb"
+                 Tag="EndDateAndTime"
+                 Text="{Binding EndDateAndTime}"    
+                 Width="auto"
+                 Height="20"
+                 Grid.Row="10"
+                 Grid.Column="2"
+                 GotFocus="TextBox_GotFocus" />
+        <StackPanel Orientation="Horizontal"
+                    Grid.Row="11"
+                    Grid.Column="2"
+                    HorizontalAlignment="Right">
+            <Button Name="Addbtn"
+                    Command="{Binding AddCommand}"
+                    Content="Opret opgave"
+                    Width="75"
+                    Height="20"
+                    Margin="10,0"
+                    Click="Addbtn_Click" />
+            <Button Name="Savebtn"
+                    Command="{Binding UpdateCommand}"
+                    Content="Gem"
+                    Width="75"
+                    Height="20"
+                    Margin="10,0"
+                    Click="Savebtn_Click" />
+            <Button Name="Cancelbtn"
+                    Content="Cancel"
+                    Width="75"
+                    Height="20"
+                    Margin="10,0"
+                    IsCancel="True"
+                    Click="Cancelbtn_Click" />
+
+
         </StackPanel>
     </Grid>
 </Window>
