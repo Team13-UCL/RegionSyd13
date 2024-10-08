@@ -5,32 +5,45 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RegionSyd13._2.View"
         mc:Ignorable="d"
-        Title="AddTaskView" Height="450" Width="800">
+        Title="AddTaskView"
+        Height="450"
+        Width="800">
     <Grid Margin="5">
         <Grid.RowDefinitions>
             <RowDefinition Height="75" />
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="75"/>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="75" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="10"/>
-            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="10" />
+            <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
         <!-- Row = 0-->
-        <Image Source="/ambulancesyd.png" Width="125" Height="75" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="0" Grid.Column="0"/>
+        <Image Source="/ambulancesyd.png"
+               Width="125"
+               Height="75"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+               Grid.Row="0"
+               Grid.Column="0" />
 
-        <Label Name="RegionIDlbl" Grid.Row="0" Grid.Column="2" VerticalAlignment="Top" Content="RegionID + Name"/>
+        <Label Name="RegionIDlbl"
+               Grid.Row="0"
+               Grid.Column="2"
+               VerticalAlignment="Top"
+               Content="RegionID + Name" />
         <!-- Row = 1-10 | Column = 0 -->
+
         <Label Name="Tasklbl" Content="Opgave" Grid.Row="1" Grid.Column="0"/>
         <TextBox Name="RegionTaskIDtb" Text="{Binding RegTaskID}" Width="auto" Height="20" Grid.Row="2" Grid.Column="0"/>
         <TextBox Name="TaskTypetb" Text="{Binding TaskType}" Width="auto" Height="20" Grid.Row="3" Grid.Column="0"/>
@@ -46,23 +59,35 @@
         <Label Content="Start" Grid.Row="1" Grid.Column="2"/>
         <TextBox Name="StartDestinationtb" Text="{Binding StartDestination}" Width="auto" Height="20" Grid.Row="2" Grid.Column="2"/>
         <Grid Grid.Row="3" Grid.Column="2">
+
+        
+
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
+
             <TextBox Name="StartCitytb" Text="{Binding StartCity}" Width="auto" Height="20"/>
             <TextBox Name="StartPostalCodetb" Text="{Binding StartPostalCode}" Width="auto" Height="20" Grid.Column="2"/>
+
+            
+
         </Grid>
         <TextBox Name="StartStreettb" Text="{Binding StartStreet}" Width="auto" Height="20" Grid.Row="4" Grid.Column="2"/>
         <TextBox Name="StartDateAndTimetb" Text="{Binding StartDateAndTime}" Width="auto" Height="20"  Grid.Row="5" Grid.Column="2"/>
 
+
         <Label Content="Slut" Grid.Row="6" Grid.Column="2"/>
         <TextBox Name="EndDestinationtb" Text="{Binding EndDestination}" Width="auto" Height="20" Grid.Row="7" Grid.Column="2"/>
         <Grid Grid.Row="8" Grid.Column="2">
+
+        
+
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
+
             <TextBox Name="EndCitytb" Text="{Binding EndCity}" Width="auto" Height="20"/>
             <TextBox Name="EndPostalCodetb" Text="{Binding EndPostalCode}" Width="auto" Height="20" Grid.Column="1"/>
         </Grid>
@@ -72,6 +97,8 @@
             <Button Name="Addbtn" Command="{Binding AddCommand}" Content="Opret opgave" Width="75" Height="20" Margin="10,0" Click="Addbtn_Click"/>
             <Button Name="Savebtn" Command="{Binding UpdateCommand}" Content="Gem" Width="75" Height="20" Margin="10,0" Click="Savebtn_Click"/>
             <Button Name="Cancelbtn" Content="Cancel" Width="75" Height="20" Margin="10,0" IsCancel="True" Click="Cancelbtn_Click"/>
+
+           
         </StackPanel>
     </Grid>
 </Window>

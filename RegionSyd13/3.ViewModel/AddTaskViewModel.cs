@@ -242,7 +242,7 @@ namespace RegionSyd13._3.ViewModel
             _locationRepo = (lRepo = new LocationRepo());
             Task SelectedTask = (Task)task;
             _taskID = SelectedTask.TaskID;
-            RegTaskID = SelectedTask.RegTaskID;
+            RegTaskID = SelectedTask.RegTaskID.ToString();
             TaskType = SelectedTask.TaskType;
             TaskDescription = SelectedTask.TaskDescription;
             ServiceGoal = SelectedTask.ServiceGoals;

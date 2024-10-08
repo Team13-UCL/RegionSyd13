@@ -58,5 +58,13 @@ namespace RegionSyd13._2.View
             taskListView.Show();
             this.Close();
         }
+        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            if (textBox.Text == textBox.Tag?.ToString())
+            {
+                textBox.Text = string.Empty;
+            }
+        }
     }
 }
