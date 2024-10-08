@@ -19,12 +19,14 @@ namespace RegionSyd13.Repository
         // Add a new Task
         public Task Add(Task entity)
         {
-            string query = "INSERT INTO Task (RegTaskID, Type, Description, ServiceGoal) " +
-                           "VALUES (@RegTaskID, @Type, @Description, @ServiceGoal)";
+            string query = "INSERT INTO Task (RegTaskID, Type, Description, ServiceGoal, PatientID, RegionID) " +
+                           "VALUES (@RegTaskID, @Type, @Description, @ServiceGoal, @PatientID, @RegionID)";
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                SqlCommand command = new SqlCommand(query, connection);                
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@PatientID", entity.PatientID);
+                command.Parameters.AddWithValue("@RegionID", entity.RegionID);
                 command.Parameters.AddWithValue("@RegTaskID", entity.RegTaskID);
                 command.Parameters.AddWithValue("@Type", entity.TaskType);
                 command.Parameters.AddWithValue("@Description", entity.TaskDescription);
@@ -35,7 +37,30 @@ namespace RegionSyd13.Repository
                 connection.Open();
                 command.ExecuteNonQuery();
             }
-            return null;
+            query = "SELECT TOP 1 * FROM Task ORDER BY TaskID DESC";
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                SqlCommand command = new SqlCommand(query, connection);
+                connection.Open();
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        entity = new Task
+                        (
+                            (int)reader["TaskID"],
+                            reader["PatientID"] != DBNull.Value ? (int)reader["PatientID"] : 0,
+                            (string)reader["RegTaskID"],
+                            (string)reader["Type"],
+                            (string)reader["Description"],
+                            (string)reader["ServiceGoal"]
+
+                        );
+                    }
+                }
+            }
+            return entity;
         }
 
         public void AddSpecific(string columns, string values)
@@ -131,16 +156,16 @@ namespace RegionSyd13.Repository
         public void Update(Task entity)
         {
             string query = "UPDATE Task SET RegTaskID = @RegTaskID, Type = @Type, Description = @Description, " +
-                           "ServiceGoal = @ServiceGoal" +
-                           "WHERE TaskID = @TaskID";
+                           "ServiceGoal = @ServiceGoal WHERE TaskID = @TaskID";
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                SqlCommand command = new SqlCommand(query, connection);                
+                SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@RegTaskID", entity.RegTaskID);
                 command.Parameters.AddWithValue("@Type", entity.TaskType);
                 command.Parameters.AddWithValue("@Description", entity.TaskDescription);
                 command.Parameters.AddWithValue("@ServiceGoal", entity.ServiceGoals);
+                command.Parameters.AddWithValue("@TaskID", entity.TaskID);
                 //skal addes patientnoter og locationstart og slut, de er bare ikke i task tabellen
 
                 connection.Open();

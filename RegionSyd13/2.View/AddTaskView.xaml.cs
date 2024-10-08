@@ -36,7 +36,23 @@ namespace RegionSyd13._2.View
             DataContext = vm;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Savebtn_Click(object sender, RoutedEventArgs e)
+        {
+            vm.UpdateTask();
+            TaskListView taskListView = new TaskListView();
+            taskListView.Show();
+            this.Close();
+        }
+
+        private void Addbtn_Click(object sender, RoutedEventArgs e)
+        {
+            //vm.AddTask();
+            TaskListView taskListView = new TaskListView();
+            taskListView.Show();
+            this.Close();
+        }
+
+        private void Cancelbtn_Click(object sender, RoutedEventArgs e)
         {
             TaskListView taskListView = new TaskListView();
             taskListView.Show();

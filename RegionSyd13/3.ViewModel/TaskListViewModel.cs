@@ -12,8 +12,13 @@ namespace RegionSyd13._3.ViewModel
 {
     public class TaskListViewModel : CurrentUser
     {
-        private readonly IRepo<Task> repository;
-        
+        private TaskRepo tRepo;
+        private readonly IRepo<Task> _taskRepo;
+        private PatientRepo pRepo;
+        private readonly IRepo<Patient> _patientRepo;
+        private LocationRepo lRepo;
+        private readonly IRepo<Location> _locationRepo;
+
         public ObservableCollection<Task> _tasks { get; set; }
         private Task selectedTask;
         public Task SelectedTask
@@ -21,33 +26,33 @@ namespace RegionSyd13._3.ViewModel
             get => selectedTask;
             set
             {
-                if (selectedTask != value)
-                {
-                    selectedTask = value;
-                    OnPropertyChanged();
-                }
+                selectedTask = value;
+                OnPropertyChanged();
             }
         }
 
-        public ICommand DeleteTaskCommand { get; private set; }
-        
+        public RelayCommand DeleteTaskCommand => new RelayCommand(Execute => DeleteTask(), CanExecute => SelectedTask != null);
+        public RelayCommand UpdateTaskCommand => new RelayCommand(Execute => Junk(), CanExecute => SelectedTask != null);
+
         public TaskListViewModel(IRepo<Task> repository)
         {
-            this.repository = repository ?? throw new ArgumentNullException(nameof(repository));
-            _tasks = new ObservableCollection<Task>(repository.GetAll());            
-            DeleteTaskCommand = new RelayCommand(DeleteTask);
+            this._taskRepo = repository ?? throw new ArgumentNullException(nameof(repository));
+            _tasks = new ObservableCollection<Task>(repository.GetAll());
+            _patientRepo = (pRepo = new PatientRepo());
+            _locationRepo = (lRepo = new LocationRepo());
 
             
         }
+        public void Junk() { for (int i = 0; i < 100; i++) ; }
 
-
-        public void DeleteTask(object obj)
+        public void DeleteTask()
         {
-            if (obj is Task taskToDelete)
-            {
-                repository.Delete(taskToDelete.TaskID);
-                _tasks.Remove(taskToDelete);
-            }
+            
+            _taskRepo.Delete(SelectedTask.TaskID);
+            _patientRepo.Delete(SelectedTask.PatientID);
+            if (SelectedTask.LocationStart != null) _locationRepo.Delete(SelectedTask.LocationStart.LocationID);
+            if (SelectedTask.LocationStop != null) _locationRepo.Delete(SelectedTask.LocationStop.LocationID);
+            _tasks.Remove(SelectedTask);
         }
         
     }

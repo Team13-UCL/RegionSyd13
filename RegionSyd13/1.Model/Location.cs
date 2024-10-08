@@ -15,7 +15,6 @@ namespace RegionSyd13._1.Model
         public string City { get; set; }
         public string PostalCode { get; set; }
         public string Street { get; set; }
-       // public string HouseNumber { get; set; }
         public DateTime DateAndTime { get; set; }
         public bool Arrival { get; set; }
 

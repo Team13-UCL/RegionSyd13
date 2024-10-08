@@ -32,60 +32,46 @@
         <Label Name="RegionIDlbl" Grid.Row="0" Grid.Column="2" VerticalAlignment="Top" Content="RegionID + Name"/>
         <!-- Row = 1-10 | Column = 0 -->
         <Label Name="Tasklbl" Content="Opgave" Grid.Row="1" Grid.Column="0"/>
-        <TextBox Name="RegionTaskIDtb" Text="{Binding RegTaskID, UpdateSourceTrigger=LostFocus}" Width="auto" Height="20" Grid.Row="2" Grid.Column="0"/>
+        <TextBox Name="RegionTaskIDtb" Text="{Binding RegTaskID}" Width="auto" Height="20" Grid.Row="2" Grid.Column="0"/>
         <TextBox Name="TaskTypetb" Text="{Binding TaskType}" Width="auto" Height="20" Grid.Row="3" Grid.Column="0"/>
         <TextBox Name="TaskDescriptiontb" Text="{Binding TaskDescription}" Width="auto" Height="20" Grid.Row="4" Grid.Column="0"/>
         <TextBox Name="ServiceGoalstb" Text="{Binding ServiceGoal}" Width="auto" Height="20" Grid.Row="5" Grid.Column="0"/>
         <Label Name="Patientlbl" Content="Patient Info" Grid.Row="6" Grid.Column="0"/>
-        <TextBox Name="FirstNametb" Text="FirstName" Width="auto" Height="20" Grid.Row="7" Grid.Column="0"/>
-        <TextBox Name="LastNametb" Text="Last Name" Width="auto" Height="20" Grid.Row="8" Grid.Column="0"/>
-        <TextBox Name="HandLingNotetb" Text="Handling Note" Width="auto" Height="20" Grid.Row="9" Grid.Column="0"/>
-        <TextBox Name="Typetb" Text="Type" Width="auto" Height="20" Grid.Row="10" Grid.Column="0"/>
+        <TextBox Name="FirstNametb" Text="{Binding FirstName}" Width="auto" Height="20" Grid.Row="7" Grid.Column="0"/>
+        <TextBox Name="LastNametb" Text="{Binding LastName}" Width="auto" Height="20" Grid.Row="8" Grid.Column="0"/>
+        <TextBox Name="HandLingNotetb" Text="{Binding HandlingNote}" Width="auto" Height="20" Grid.Row="9" Grid.Column="0"/>
+        <TextBox Name="Typetb" Text="{Binding PatientType}" Width="auto" Height="20" Grid.Row="10" Grid.Column="0"/>
 
         <!-- Row = 1-10 | Column = 2-->
         <Label Content="Start" Grid.Row="1" Grid.Column="2"/>
-        <TextBox Name="StartDestinationtb" Text="Destination" Width="auto" Height="20" Grid.Row="2" Grid.Column="2"/>
-        <Grid Grid.Row="2" Grid.Column="2">
+        <TextBox Name="StartDestinationtb" Text="{Binding StartDestination}" Width="auto" Height="20" Grid.Row="2" Grid.Column="2"/>
+        <Grid Grid.Row="3" Grid.Column="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
-            <TextBox Name="StartCitytb" Text="City" Width="auto" Height="20"/>
-            <TextBox Name="StartPostalCodetb" Text="PostalCode" Width="auto" Height="20" Grid.Column="1"/>
+            <TextBox Name="StartCitytb" Text="{Binding StartCity}" Width="auto" Height="20"/>
+            <TextBox Name="StartPostalCodetb" Text="{Binding StartPostalCode}" Width="auto" Height="20" Grid.Column="2"/>
         </Grid>
-        <TextBox Name="StartStreettb" Text="Street" Width="auto" Height="20" Grid.Row="3" Grid.Column="2"/>
-        <Grid Grid.Row="4" Grid.Column="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-            </Grid.ColumnDefinitions>
-            <TextBox Name="StartDatetb" Text="Date" Width="auto" Height="20"/>
-            <TextBox Name="StartTimetb" Text="Time" Width="auto" Height="20" Grid.Column="1"/>
-        </Grid>
+        <TextBox Name="StartStreettb" Text="{Binding StartStreet}" Width="auto" Height="20" Grid.Row="4" Grid.Column="2"/>
+        <TextBox Name="StartDateAndTimetb" Text="{Binding StartDateAndTime}" Width="auto" Height="20"  Grid.Row="5" Grid.Column="2"/>
 
         <Label Content="Slut" Grid.Row="6" Grid.Column="2"/>
-        <TextBox Name="EndDestinationtb" Text="Destination" Width="auto" Height="20" Grid.Row="7" Grid.Column="2"/>
+        <TextBox Name="EndDestinationtb" Text="{Binding EndDestination}" Width="auto" Height="20" Grid.Row="7" Grid.Column="2"/>
         <Grid Grid.Row="8" Grid.Column="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
-            <TextBox Name="EndCitytb" Text="City" Width="auto" Height="20"/>
-            <TextBox Name="EndPostalCodetb" Text="PostalCode" Width="auto" Height="20" Grid.Column="1"/>
+            <TextBox Name="EndCitytb" Text="{Binding EndCity}" Width="auto" Height="20"/>
+            <TextBox Name="EndPostalCodetb" Text="{Binding EndPostalCode}" Width="auto" Height="20" Grid.Column="1"/>
         </Grid>
-        <TextBox Name="EndStreettb" Text="Street" Width="auto" Height="20" Grid.Row="9" Grid.Column="2"/>
-        <Grid Grid.Row="10" Grid.Column="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-            </Grid.ColumnDefinitions>
-            <TextBox Name="EndDatetb" Text="Date" Width="auto" Height="20"/>
-            <TextBox Name="EndTimetb" Text="Time" Width="auto" Height="20" Grid.Column="1"/>
-        </Grid>
+        <TextBox Name="EndStreettb" Text="{Binding EndStreet}" Width="auto" Height="20" Grid.Row="9" Grid.Column="2"/>
+        <TextBox Name="EndDateAndTimetb" Text="{Binding EndDateAndTime}" Width="auto" Height="20" Grid.Row="10" Grid.Column="2"/>
         <StackPanel Orientation="Horizontal" Grid.Row="11" Grid.Column="2" HorizontalAlignment="Right">
-            <Button Name="Addbtn" Content="Tilføj opgave" Width="75" Height="20" Margin="10,0"/>
-            <Button Name="Savebtn" Content="Gem" Width="75" Height="20" Margin="10,0"/>
-            <Button Name="Cancelbtn" Content="Cancel" Width="75" Height="20" Margin="10,0" IsCancel="True"/>
+            <Button Name="Addbtn" Command="{Binding AddCommand}" Content="Opret opgave" Width="75" Height="20" Margin="10,0" Click="Addbtn_Click"/>
+            <Button Name="Savebtn" Command="{Binding UpdateCommand}" Content="Gem" Width="75" Height="20" Margin="10,0" Click="Savebtn_Click"/>
+            <Button Name="Cancelbtn" Content="Cancel" Width="75" Height="20" Margin="10,0" IsCancel="True" Click="Cancelbtn_Click"/>
         </StackPanel>
     </Grid>
 </Window>

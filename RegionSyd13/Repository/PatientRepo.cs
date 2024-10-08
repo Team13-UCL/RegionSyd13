@@ -33,7 +33,7 @@ namespace RegionSyd13.Repository
                 connection.Open();
                 command.ExecuteNonQuery();
             }
-            query = "SELECT * FROM Patient ORDER BY ID DESC LIMIT 1";
+            query = "SELECT TOP 1 * FROM Patient ORDER BY PatientID DESC";
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 SqlCommand command = new SqlCommand(query, connection);

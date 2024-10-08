@@ -142,22 +142,14 @@ namespace RegionSyd13._1.Model
         public string RegTaskID
         {
             get => _regTaskID;
-            set
-            {
-                if(_isLocation == true) _repo.UpdateSpecific("RegTaskID", "'" + value + "'", TaskID); 
-                _regTaskID = value;
-            }
+            set { _regTaskID = value; }
         }
         private int _patientID;
 
         public int PatientID
         {
             get { return _patientID; }
-            set 
-            {
-                if (_isLocation == true) _repo.UpdateSpecific("PatientID", "'" + value + "'", TaskID);
-                _patientID = value;
-            }
+            set  { _patientID = value; }
         }
 
         public int TaskID { get; set; }
@@ -165,42 +157,25 @@ namespace RegionSyd13._1.Model
         public int RegionID 
         {
             get { return _regionID; }
-            set 
-            {
-                if (_isLocation == true) _repo.UpdateSpecific("RegionID", "'" + value + "'", TaskID);
-                _regionID = value;
-            }
+            set  { _regionID = value; }
         }
         private string _taskType;
         public string TaskType 
         {
             get => _taskType;
-            set
-            {
-                _taskType = value;
-                OnPropertyChanged();
-            }
+            set { _taskType = value; }
         }
         private string _taskDescription;
         public string TaskDescription 
         { 
             get { return _taskDescription; }
-            set 
-            {
-                if (_isLocation == true) { _repo.UpdateSpecific("Description", "'" + value + "'", TaskID); } 
-                _taskDescription = value;
-            }
+            set {  _taskDescription = value; }
         }
         private string _serviceGoals;
         public string ServiceGoals 
         {
             get { return _serviceGoals; }
-            set 
-            {
-                if (_isLocation == true) { _repo.UpdateSpecific("Type", "'" + value + "'", TaskID); } 
-                _serviceGoals = value;
-            }
+            set  {  _serviceGoals = value; }
         }
-
     }
 }

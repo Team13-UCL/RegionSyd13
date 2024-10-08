@@ -28,49 +28,24 @@ namespace RegionSyd13.Repository
         }
         public Location Add(Location entity)
         {
-            string query = "INSERT INTO Location (LocationID, City, PostalCode, Street, Date, Time) " +
-                           "VALUES (@LocationID, @City, @PostalCode, @Street, @Date, @Time)";
+            string query = "INSERT INTO Location (Destination, City, PostalCode, Street, Date, Time, TaskID) " +
+                           "VALUES (@Destination, @City, @PostalCode, @Street, @Date, @Time, @TaskID)";
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@LocationID", entity.LocationID);
+                command.Parameters.AddWithValue("@Destination", entity.Destination);
                 command.Parameters.AddWithValue("@City", entity.City);
                 command.Parameters.AddWithValue("@PostalCode", entity.PostalCode);
                 command.Parameters.AddWithValue("@Street", entity.Street);                
                 command.Parameters.AddWithValue("@Date", entity.DateAndTime.Date);        
                 command.Parameters.AddWithValue("@Time", entity.DateAndTime.TimeOfDay);
+                command.Parameters.AddWithValue("@TaskID", entity.TaskID);
                 connection.Open();
                 command.ExecuteNonQuery();
             }
-            query = "SELECT * FROM Patient ORDER BY ID DESC LIMIT 1";
-            using (SqlConnection connection = new SqlConnection(_connectionString))
-            {
-                SqlCommand command = new SqlCommand(query, connection);
-                connection.Open();
-
-                using (SqlDataReader reader = command.ExecuteReader())
-                {
-                    if (reader.Read())
-                    {
-
-                        var date = (DateTime)reader["Date"];
-                        var time = (TimeSpan)reader["Time"];
-
-                        entity = new Location
-                        {
-                            LocationID = (int)reader["LocationID"],
-                            City = (string)reader["City"],
-                            PostalCode = (string)reader["PostalCode"],
-                            Street = (string)reader["Street"],
-                            //HouseNumber = (string)reader["HouseNumber"],
-                            DateAndTime = date.Add(time)
-                        };
-                    }
-                }
-            }
-
-            return entity;
+            
+            return null;
         }
 
         public void Delete(int id)
@@ -100,19 +75,18 @@ namespace RegionSyd13.Repository
                 {
                     while (reader.Read())
                     {
-                        var date = (DateTime)reader["Date"];  
-                        var time = (TimeSpan)reader["Time"];  
+                        var date = (DateTime)reader["Date"];
+                        var time = (TimeSpan)reader["Time"];
                         locations.Add(new Location
                         {
-                            LocationID = (int)reader["LocationID"],
-                            TaskID = (int)reader["TaskID"],
-                            City = (string)reader["City"],
-                            PostalCode = (string)reader["PostalCode"],
-                            Street = (string)reader["Street"],
-                            //HouseNumber = (string)reader["HouseNumber"],
-                            DateAndTime = date.Add(time),
-                            Destination = (string)reader["Destination"],
-                            Arrival = Convert.ToBoolean(reader["Arrival"])
+                            LocationID = reader["LocationID"] is DBNull ? 0 : (int)reader["LocationID"], // Default to 0 if DBNull
+                            TaskID = reader["TaskID"] is DBNull ? 0 : (int)reader["TaskID"], // Default to 0 if DBNull
+                            City = reader["City"] is DBNull ? string.Empty : (string)reader["City"], // Default to empty string if DBNull
+                            PostalCode = reader["PostalCode"] is DBNull ? string.Empty : (string)reader["PostalCode"], // Default to empty string if DBNull
+                            Street = reader["Street"] is DBNull ? string.Empty : (string)reader["Street"], // Default to empty string if DBNull
+                            DateAndTime = date.Add(time), // Combine date and time
+                            Destination = reader["Destination"] is DBNull ? string.Empty : (string)reader["Destination"], // Default to empty string if DBNull
+                            Arrival = reader["Arrival"] is DBNull ? false : Convert.ToBoolean(reader["Arrival"]) // Default to false if DBNull
                         });
                     }
                 }
