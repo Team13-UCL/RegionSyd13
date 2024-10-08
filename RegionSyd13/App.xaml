@@ -2,7 +2,7 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:RegionSyd13"
-             StartupUri="2.View/TaskListView.xaml">
+             StartupUri="2.View/LoginView.xaml">
     <Application.Resources>
         
     </Application.Resources>

@@ -5,87 +5,251 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RegionSyd13._2.View"
         mc:Ignorable="d"
-        Title="AddTaskView" Height="450" Width="800">
+        Title="AddTaskView"
+        Height="450"
+        Width="800">
     <Grid Margin="5">
         <Grid.RowDefinitions>
             <RowDefinition Height="75" />
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="75"/>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="75" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="10"/>
-            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="10" />
+            <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
         <!-- Row = 0-->
-        <Image Source="/ambulancesyd.png" Width="125" Height="75" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="0" Grid.Column="0"/>
+        <Image Source="/ambulancesyd.png"
+               Width="125"
+               Height="75"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+               Grid.Row="0"
+               Grid.Column="0" />
 
-        <Label Name="RegionIDlbl" Grid.Row="0" Grid.Column="2" VerticalAlignment="Top" Content="RegionID + Name"/>
+        <Label Name="RegionIDlbl"
+               Grid.Row="0"
+               Grid.Column="2"
+               VerticalAlignment="Top"
+               Content="RegionID + Name" />
         <!-- Row = 1-10 | Column = 0 -->
-        <Label Name="Tasklbl" Content="Opgave" Grid.Row="1" Grid.Column="0"/>
-        <TextBox Name="RegionTaskIDtb" Text="{Binding RegTaskID, UpdateSourceTrigger=LostFocus}" Width="auto" Height="20" Grid.Row="2" Grid.Column="0"/>
-        <TextBox Name="TaskTypetb" Text="{Binding TaskType}" Width="auto" Height="20" Grid.Row="3" Grid.Column="0"/>
-        <TextBox Name="TaskDescriptiontb" Text="{Binding TaskDescription}" Width="auto" Height="20" Grid.Row="4" Grid.Column="0"/>
-        <TextBox Name="ServiceGoalstb" Text="{Binding ServiceGoal}" Width="auto" Height="20" Grid.Row="5" Grid.Column="0"/>
-        <Label Name="Patientlbl" Content="Patient Info" Grid.Row="6" Grid.Column="0"/>
-        <TextBox Name="FirstNametb" Text="FirstName" Width="auto" Height="20" Grid.Row="7" Grid.Column="0"/>
-        <TextBox Name="LastNametb" Text="Last Name" Width="auto" Height="20" Grid.Row="8" Grid.Column="0"/>
-        <TextBox Name="HandLingNotetb" Text="Handling Note" Width="auto" Height="20" Grid.Row="9" Grid.Column="0"/>
-        <TextBox Name="Typetb" Text="Type" Width="auto" Height="20" Grid.Row="10" Grid.Column="0"/>
+        <Label Name="Tasklbl"
+               Content="Opgave"
+               Grid.Row="1"
+               Grid.Column="0" />
+        <TextBox Name="RegionTaskIDtb"
+                 Text="{Binding RegTaskID, UpdateSourceTrigger=LostFocus}"
+                 Width="auto"
+                 Height="20"
+                 Grid.Row="2"
+                 Grid.Column="0" />
+        <TextBox Name="TaskTypetb"
+                 Text="{Binding TaskType}"
+                 Width="auto"
+                 Height="20"
+                 Grid.Row="3"
+                 Grid.Column="0" />
+        <TextBox Name="TaskDescriptiontb"
+                 Text="{Binding TaskDescription}"
+                 Width="auto"
+                 Height="20"
+                 Grid.Row="4"
+                 Grid.Column="0" />
+        <TextBox Name="ServiceGoalstb"
+                 Tag="ServiceGoal"
+                 Text="{Binding ServiceGoal}"
+                 Width="auto"
+                 Height="20"
+                 Grid.Row="5"
+                 Grid.Column="0"
+                 GotFocus="TextBox_GotFocus"/>
+        <Label Name="Patientlbl"
+               Content="Patient Info"
+               Grid.Row="6"
+               Grid.Column="0" />
+        <TextBox Name="FirstNametb"
+                 Tag="FirstName"
+                 Text="FirstName"
+                 Width="auto"
+                 Height="20"
+                 Grid.Row="7"
+                 Grid.Column="0"
+                 GotFocus="TextBox_GotFocus" />
+        <TextBox Name="LastNametb"
+                 Tag="Last Name"
+                 Text="Last Name"
+                 Width="auto"
+                 Height="20"
+                 Grid.Row="8"
+                 Grid.Column="0"
+                 GotFocus="TextBox_GotFocus" />
+        <TextBox Name="HandLingNotetb"
+                 Tag="Handling Note"
+                 Text="Handling Note"
+                 Width="auto"
+                 Height="20"
+                 Grid.Row="9"
+                 Grid.Column="0"
+                 GotFocus="TextBox_GotFocus"/>
+        <TextBox Name="Typetb"
+                 Tag="Type"
+                 Text="Type"
+                 Width="auto"
+                 Height="20"
+                 Grid.Row="10"
+                 Grid.Column="0"
+                 GotFocus="TextBox_GotFocus"/>
 
         <!-- Row = 1-10 | Column = 2-->
-        <Label Content="Start" Grid.Row="1" Grid.Column="2"/>
-        <TextBox Name="StartDestinationtb" Text="Destination" Width="auto" Height="20" Grid.Row="2" Grid.Column="2"/>
-        <Grid Grid.Row="2" Grid.Column="2">
+        <Label Content="Start"
+               Grid.Row="1"
+               Grid.Column="2" />
+        <TextBox Name="StartDestinationtb"
+                 Tag="Destination"
+                 Text="Destination"
+                 Width="auto"
+                 Height="20"
+                 Grid.Row="2"
+                 Grid.Column="2"
+                 GotFocus="TextBox_GotFocus"/>
+        <Grid Grid.Row="2"
+              Grid.Column="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
-            <TextBox Name="StartCitytb" Text="City" Width="auto" Height="20"/>
-            <TextBox Name="StartPostalCodetb" Text="PostalCode" Width="auto" Height="20" Grid.Column="1"/>
+            <TextBox Name="StartCitytb"
+                     Tag="City"
+                     Text="City"
+                     Width="auto"
+                     Height="20"
+                     GotFocus="TextBox_GotFocus" />
+            <TextBox Name="StartPostalCodetb"
+                     Tag="PostalCode"
+                     Text="PostalCode"
+                     Width="auto"
+                     Height="20"
+                     Grid.Column="1"
+                     GotFocus="TextBox_GotFocus" />
         </Grid>
-        <TextBox Name="StartStreettb" Text="Street" Width="auto" Height="20" Grid.Row="3" Grid.Column="2"/>
-        <Grid Grid.Row="4" Grid.Column="2">
+        <TextBox Name="StartStreettb"
+                 Tag="Street"
+                 Text="Street"
+                 Width="auto"
+                 Height="20"
+                 Grid.Row="3"
+                 Grid.Column="2"
+                 GotFocus="TextBox_GotFocus" />
+        <Grid Grid.Row="4"
+              Grid.Column="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
-            <TextBox Name="StartDatetb" Text="Date" Width="auto" Height="20"/>
-            <TextBox Name="StartTimetb" Text="Time" Width="auto" Height="20" Grid.Column="1"/>
+            <TextBox Name="StartDatetb"
+                     Tag="Date"
+                     Text="Date"
+                     Width="auto"
+                     Height="20"
+                     GotFocus="TextBox_GotFocus" />
+            <TextBox Name="StartTimetb"
+                     Tag="Time"
+                     Text="Time"
+                     Width="auto"
+                     Height="20"
+                     Grid.Column="1"
+                     GotFocus="TextBox_GotFocus" />
         </Grid>
 
-        <Label Content="Slut" Grid.Row="6" Grid.Column="2"/>
-        <TextBox Name="EndDestinationtb" Text="Destination" Width="auto" Height="20" Grid.Row="7" Grid.Column="2"/>
-        <Grid Grid.Row="8" Grid.Column="2">
+        <Label Content="Slut"
+               Grid.Row="6"
+               Grid.Column="2" />
+        <TextBox Name="EndDestinationtb"
+                 Tag="Destination"
+                 Text="Destination"
+                 Width="auto"
+                 Height="20"
+                 Grid.Row="7"
+                 Grid.Column="2"
+                 GotFocus="TextBox_GotFocus" />
+        <Grid Grid.Row="8"
+              Grid.Column="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
-            <TextBox Name="EndCitytb" Text="City" Width="auto" Height="20"/>
-            <TextBox Name="EndPostalCodetb" Text="PostalCode" Width="auto" Height="20" Grid.Column="1"/>
+            <TextBox Name="EndCitytb"
+                     Tag="City"
+                     Text="City"
+                     Width="auto"
+                     Height="20"
+                     GotFocus="TextBox_GotFocus" />
+            <TextBox Name="EndPostalCodetb"
+                     Tag="PostalCode"
+                     Text="PostalCode"
+                     Width="auto"
+                     Height="20"
+                     Grid.Column="1"
+                     GotFocus="TextBox_GotFocus" />
         </Grid>
-        <TextBox Name="EndStreettb" Text="Street" Width="auto" Height="20" Grid.Row="9" Grid.Column="2"/>
-        <Grid Grid.Row="10" Grid.Column="2">
+        <TextBox Name="EndStreettb"
+                 Tag="Street"
+                 Text="Street"
+                 Width="auto"
+                 Height="20"
+                 Grid.Row="9"
+                 Grid.Column="2"
+                 GotFocus="TextBox_GotFocus" />
+        <Grid Grid.Row="10"
+              Grid.Column="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
-            <TextBox Name="EndDatetb" Text="Date" Width="auto" Height="20"/>
-            <TextBox Name="EndTimetb" Text="Time" Width="auto" Height="20" Grid.Column="1"/>
+            <TextBox Name="EndDatetb"
+                     Tag="Date"
+                     Text="Date"
+                     Width="auto"
+                     Height="20"
+                     GotFocus="TextBox_GotFocus" />
+            <TextBox Name="EndTimetb"
+                     Tag="Time"
+                     Text="Time"
+                     Width="auto"
+                     Height="20"
+                     Grid.Column="1"
+                     GotFocus="TextBox_GotFocus" />
         </Grid>
-        <StackPanel Orientation="Horizontal" Grid.Row="11" Grid.Column="2" HorizontalAlignment="Right">
-            <Button Name="Addbtn" Content="Tilføj opgave" Width="75" Height="20" Margin="10,0"/>
-            <Button Name="Savebtn" Content="Gem" Width="75" Height="20" Margin="10,0"/>
-            <Button Name="Cancelbtn" Content="Cancel" Width="75" Height="20" Margin="10,0" IsCancel="True"/>
+        <StackPanel Orientation="Horizontal"
+                    Grid.Row="11"
+                    Grid.Column="2"
+                    HorizontalAlignment="Right">
+            <Button Name="Addbtn"
+                    Content="Tilføj opgave"
+                    Width="75"
+                    Height="20"
+                    Margin="10,0" />
+            <Button Name="Savebtn"
+                    Content="Gem"
+                    Width="75"
+                    Height="20"
+                    Margin="10,0" />
+            <Button Name="Cancelbtn"
+                    Content="Cancel"
+                    Width="75"
+                    Height="20"
+                    Margin="10,0"
+                    IsCancel="True" />
         </StackPanel>
     </Grid>
 </Window>
